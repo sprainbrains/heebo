@@ -18,18 +18,21 @@
 */
 
 import QtQuick 2.0
+import Sailfish.Silica 1.0
 
 import "qrc:///js/constants.js" as Constants
 
-FullPage {
+//FullPage {
+Page {
     id: mainPage
-    Flickable {
+    SilicaFlickable {
         id: flickList
-        anchors { top: parent.top; 
-                  left: parent.left; right: parent.right }
-        height: parent.height-99
+//        anchors { top: parent.top;
+//                  left: parent.left; right: parent.right }
+        anchors.fill: parent
+        //height: parent.height-99
         clip: true
-        flickableDirection: Flickable.VerticalFlick
+//        flickableDirection: Flickable.VerticalFlick
         contentWidth: parent.width
         contentHeight: logoImage.height + versionText.paintedHeight +
         cred1Text.paintedHeight + cred2Text.paintedHeight +
@@ -82,9 +85,12 @@ FullPage {
             style: "small"
             anchors.top: copyrightText.bottom
         }
+        VerticalScrollDecorator {
+                flickable: flickList
+        }
 
     }
-    ScrollBar {
-        flickableItem: flickList
-    }
+//    ScrollBar {
+//        flickableItem: flickList
+//    }
 }

@@ -90,7 +90,7 @@ var last_level_answer = "ZÖMG!!";
 // About
 //-----------------------------------------------------------------------------
 
-var heebo_version = "1.2";
+var heebo_version = "Sailfish 0.1 beta";
 var heebo_description =
     "Simple and addictive Match 3 game with quirky characters.";
 var heebo_copyright

@@ -20,6 +20,7 @@
 import QtQuick 2.0
 
 Rectangle {
-    SystemPalette { id: activePalette }
-    color: activePalette.window
+    color: "transparent"
+//    SystemPalette { id: activePalette }
+//    color: activePalette.window
 }

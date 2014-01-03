@@ -18,10 +18,12 @@
 */
 
 import QtQuick 2.0
+import Sailfish.Silica 1.0
 
 import "qrc:///js/constants.js" as Constants
 
-JewelPage {
+//JewelPage {
+Page {
     id: mainPage
     
     anchors.fill: parent

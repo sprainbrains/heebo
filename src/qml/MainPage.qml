@@ -18,11 +18,13 @@
 */
 
 import QtQuick 2.0
+import Sailfish.Silica 1.0
 
 /* import "qrc:///js/constants.js" as Constants */
 import "qrc:///js/jewels.js" as Jewels
 
-JewelPage {
+//JewelPage {
+Page {
     id: mainPage
     
     property real buttonOffset: 0.0
@@ -34,7 +36,7 @@ JewelPage {
     signal animDone()
     signal jewelKilled();
     
-    SystemPalette { id: activePalette }
+    //SystemPalette { id: activePalette }
 
     Component.onCompleted: {
         Jewels.init();
@@ -45,12 +47,13 @@ JewelPage {
     }
 
     function openFile(file) {
-        var component = Qt.createComponent(file)
+        pageStack.push(Qt.resolvedUrl(file))
+//        var component = Qt.createComponent(file)
 
-        if (component.status == Component.Ready)
-            pageStack.push(component);
-        else
-            console.log("Error loading component:", component.errorString());
+//        if (component.status == Component.Ready)
+//            pageStack.push(component);
+//        else
+//            console.log("Error loading component:", component.errorString());
     }
 
     JewelDialog {
@@ -58,6 +61,13 @@ JewelPage {
         anchors.centerIn: background
         z: 55
     }
+
+    SilicaFlickable {
+        anchors.fill: parent
+        contentHeight: mainPage.height
+        id: flick
+    }
+
 
     Item {
         id: background;
@@ -74,9 +84,9 @@ JewelPage {
     ToolBar {
         id: toolBar
 
-        ToolBarExitButton {
-            id: backButton
-        }
+//        ToolBarExitButton {
+//            id: backButton
+//        }
 
         Row {
             anchors {
@@ -248,7 +258,7 @@ JewelPage {
                 text: "Help"
                 buttonImage: "qrc:///images/icon_help.png"
                 pressedButtonImage: "qrc:///images/icon_help_pressed.png"
-                onClicked: { mainMenu.hide(); openFile("HelpPage.qml") }
+                onClicked: { mainMenu.hide(); openFile("qrc:///qml/HelpPage.qml") }
                 /* For testing levels... */
 //                onClicked: { mainMenu.hide(); Jewels.nextLevel() }
             }
@@ -256,7 +266,7 @@ JewelPage {
                 text: "About"
                 buttonImage: "qrc:///images/icon_about.png"
                 pressedButtonImage: "qrc:///images/icon_about_pressed.png"
-                onClicked: { mainMenu.hide(); openFile("AboutPage.qml") }
+                onClicked: { mainMenu.hide(); openFile("qrc:///qml/AboutPage.qml") }
                 /* For testing levels... */
 //                onClicked: { mainMenu.hide(); Jewels.prevLevel() }
                 /* For testing dialogs */

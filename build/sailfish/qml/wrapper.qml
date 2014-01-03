@@ -5,4 +5,5 @@ ApplicationWindow
 {
     initialPage: Qt.resolvedUrl("qrc:///qml/main.qml")
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    Component.onCompleted: console.log("-- application window complete")
 }

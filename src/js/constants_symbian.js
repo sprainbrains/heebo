@@ -15,7 +15,7 @@ var tool_bar_left_margin = 135;
 var level_margin_1digit_offset = 10;
 
 // About and Help text colour
-var color_info = "#F2F2F2";
+var color_info = "#0000ff";
 
 var menu_jump = 30;
 

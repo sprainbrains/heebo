@@ -16,7 +16,7 @@ HEADERS += ../../src/cpp/gameview.h ../../src/cpp/gamemapset.h	\
 SOURCES += ../../src/cpp/gameview.cpp ../../src/cpp/heebo.cpp		\
            ../../src/cpp/gamemapset.cpp ../../src/cpp/gamemap.cpp
 
-RESOURCES +=  ../../game60.qrc ../../common.qrc ../../desktop.qrc
+RESOURCES +=   ../../common.qrc ../../desktop.qrc ../../game60.qrc
 
 OTHER_FILES += \
     ./heebo.desktop \

@@ -18,19 +18,23 @@
   */
 
 import QtQuick 2.0
+import Sailfish.Silica 1.0
 
 import "../js/constants.js" as Constants
 
-FullPage {
+//FullPage {
+Page {
     id: mainPage
 
-    Flickable {
+    SilicaFlickable {
         id: flickList
-        anchors { top: parent.top; 
-                  left: parent.left; right: parent.right }
-        height: parent.height-99
+        anchors.fill: parent
+
+//        anchors { top: parent.top;
+//                  left: parent.left; right: parent.right }
+//        height: parent.height-99
         clip: true
-        flickableDirection: Flickable.VerticalFlick
+//        flickableDirection: Flickable.VerticalFlick
         contentWidth: parent.width
         contentHeight: titleText.paintedHeight +
                        help_topic_1.paintedHeight + help_text_1.paintedHeight +
@@ -105,9 +109,13 @@ FullPage {
             style: "emphasis"
             anchors.top: help_text_4.bottom
         }
+        VerticalScrollDecorator {
+                flickable: flickList
+        }
+
     }
-    ScrollBar {
-        flickableItem: flickList
-    }
+//    ScrollBar {
+//        flickableItem: flickList
+//    }
 
 }

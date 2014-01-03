@@ -27,24 +27,25 @@ Rectangle {
     width: parent.width; height: Constants.toolbar_height
     anchors.bottom: parent.bottom
 
-    color: "#000000"
+    color: "transparent" //#000000"
 
     Rectangle {
         width: parent.width
         height: 1
         anchors.top: parent.top
         anchors.topMargin: 1
-        color: "#6B6B6B"
+        color: "transparent" //#6B6B6B"
     }
     
     Rectangle {
         width: parent.width
         height: parent.height-2
         anchors.bottom: parent.bottom
-        
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "#242424" }
-            GradientStop { position: 1.0; color: "#0C0C0C" }
-        }
+        color: "transparent"
+
+//        gradient: Gradient {
+//            GradientStop { position: 0.0; color: "#242424" }
+//            GradientStop { position: 1.0; color: "#0C0C0C" }
+//        }
     }
 }

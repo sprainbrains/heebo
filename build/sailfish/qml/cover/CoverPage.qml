@@ -4,7 +4,7 @@ import Sailfish.Silica 1.0
 
 CoverBackground {
     Image {
-         source: "../../heebo.png"
+         source: "qrc:///images/heebo.png"
          anchors.centerIn: parent
          Label
          {
