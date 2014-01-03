@@ -104,7 +104,7 @@ var code_license =
 
 var graphics_license = "All graphics in Heebo are licensed under the <a style=\"color: "+color_uiaccent+"\" href=\"http://creativecommons.org/licenses/by-sa/3.0/\">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.";
 
-var heebo_credit_coding = "<i>Cöde</i><br\><b>Mats Sj&ouml;berg</b><br\>mats@sjoberg.fi<br/><a style=\"color: "+color_uiaccent+"\" href=\"http://www.sjoberg.fi/mats/\">www.sjoberg.fi/mats</a>";
+var heebo_credit_coding = "<i>Cöde</i><br\><b>Mats Sj&ouml;berg</b><br\>mats@sjoberg.fi<br/><a style=\"color: "+color_uiaccent+"\" href=\"http://www.sjoberg.fi/mats/\">www.sjoberg.fi/mats</a><br\><i>Pörting assistance</i><br\><b>Kimmo Lindholm</b><br\>kimmo@eke.fi<br/><a style=\"color: "+color_uiaccent+"\" href=\"http://google.com/+kimmolindholm\">google.com/+kimmolindholm</a>";
 
 
 var heebo_credit_graphics = "<i>Gräphix</i><br\><b>Niklas Gustafsson</b><br\>nikui@nikui.net<br/><a style=\"color: "+color_uiaccent+"\" href=\"http://www.nikui.net/\">www.nikui.net</a>";
