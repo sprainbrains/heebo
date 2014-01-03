@@ -82,6 +82,7 @@ FullPage {
             style: "small"
             anchors.top: copyrightText.bottom
         }
+
     }
     ScrollBar {
         flickableItem: flickList

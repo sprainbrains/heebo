@@ -5,8 +5,8 @@
 //-----------------------------------------------------------------------------
 
 // Block pixel size
-var block_width  = 60;
-var block_height = 60;
+var block_width  = 90;
+var block_height = 90;
 
 // height of toolbar
 var toolbar_height = 100;

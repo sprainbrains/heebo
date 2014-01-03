@@ -1,5 +1,5 @@
 Name: heebo
-Summary: Heebo
+Summary: Heebo for jolla
 Version: 0.1
 Release: 1
 Group: Qt/Qt
@@ -8,7 +8,7 @@ License: LICENSE
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |-
-  Heebo
+  Heebo port to jolla
 Configure: none
 Builder: qtc5
 PkgConfigBR:
@@ -21,8 +21,10 @@ Requires:
 Files:
 - /usr/share/icons/hicolor/86x86/apps
 - /usr/share/applications
+- /usr/share/heebo
 - /usr/bin
 - '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
 - '%{_datadir}/applications/%{name}.desktop'
+- '%{_datadir}/%{name}/qml'
 - '%{_bindir}'
 PkgBR: []

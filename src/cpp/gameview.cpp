@@ -20,20 +20,30 @@
 #include "gameview.h"
 
 #include <QQmlEngine>
+#include <QQuickItem>
+#include <QtGui>
+#include <QtQuick>
 
 //------------------------------------------------------------------------------
 
-GameView::GameView() : QQuickView() {
+GameView::GameView(QQuickView *view) : QQuickView(), view(view) {
+
   readSettings();
+
+  //QObject * object = view->rootObject();
 
   m_mapset = new GameMapSet(":/map.dat", m_level, this);
   connect(m_mapset, SIGNAL(levelChanged()), this, SLOT(onLevelChanged()));
 
-  rootContext()->setContextProperty("mapset", m_mapset);
-  rootContext()->setContextProperty("gameview", this);
+  view->rootContext()->setContextProperty("mapset", m_mapset);
+  view->rootContext()->setContextProperty("gameview", view);
 
-  setSource(QUrl("qrc:///qml/main.qml"));
+  //view->setSource(QUrl("qrc:///qml/main.qml"));
+
+
+
 }
+
 
 //------------------------------------------------------------------------------
 

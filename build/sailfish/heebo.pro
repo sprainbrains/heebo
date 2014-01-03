@@ -4,8 +4,8 @@
 TARGET = heebo
 CONFIG += sailfishapp
 
-#DEPENDPATH += .
-#INCLUDEPATH += .
+DEPENDPATH += .
+INCLUDEPATH += .
 #QT += qml quick
 OBJECTS_DIR = obj
 
@@ -22,5 +22,7 @@ OTHER_FILES += \
     ./heebo.desktop \
     rpm/heebo.yaml \
     rpm/heebo.spec \
-    heebo.png
+    heebo.png \
+    qml/wrapper.qml \
+    qml/cover/CoverPage.qml
 

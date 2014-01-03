@@ -189,7 +189,10 @@ JewelPage {
 
         function toggle() {
             if (okDialog.isClosed()) {
-              visible ? hide() : show();
+              //visible ? hide() : show(); // was giving warning
+                if (visible) hide()
+                 else
+                    show()
             }
         }
     

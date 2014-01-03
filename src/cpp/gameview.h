@@ -30,7 +30,8 @@
 class GameView : public QQuickView {
 Q_OBJECT
 public:
-  explicit GameView();
+    explicit GameView(QQuickView *view);
+
 
 public slots:
   QString platform() const;
@@ -38,11 +39,15 @@ public slots:
   void quitApp();
 
 private:
+
+  QQuickView *view;
+
   void writeSettings();
   void readSettings();
 
   GameMapSet* m_mapset;
   int m_level;
+
 };
 
 #endif /* _GAMEVIEW_H_ */

@@ -17,18 +17,31 @@
   along with Heebo.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <sailfishapp.h>
+#include <QScopedPointer>
+#include <QQuickView>
+#include <QQmlEngine>
 #include <QGuiApplication>
+#include <QQmlContext>
+
 #include "gameview.h"
 
-Q_DECL_EXPORT int main(int argc, char** argv) {
-    QGuiApplication app(argc, argv);
-    
-    GameView view;
-#ifdef HARMATTAN
-    view.showFullScreen();
-#else
-    view.show();
-#endif
 
-    return app.exec();
+int main(int argc, char *argv[])
+{
+
+
+//    qmlRegisterType<GameView>("heebo.GameView", 1, 0, "GameView");
+
+//    QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
+//    QScopedPointer<QQuickView> view(SailfishApp::createView());
+    QGuiApplication *app(SailfishApp::application(argc, argv));
+    QQuickView *view(SailfishApp::createView());
+
+    GameView game(view);
+
+    view->setSource(SailfishApp::pathTo("qml/wrapper.qml"));
+    view->show();
+
+    return app->exec();
 }
