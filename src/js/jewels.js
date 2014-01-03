@@ -188,7 +188,6 @@ var newBackgroundBlock = function (j, i) {
 
 // Starts new level
 var startNewGame = function () {
-    console.log("startnewgame")
     currentLevelText.text = mapset.level+1;
     lastLevelText.text = mapset.numLevels;
     mainPage.isRunning = false;
@@ -262,7 +261,6 @@ var init = function () {
 
 // Restart with the first level
 var firstLevel = function () {
-    console.log("firstlevel")
     mapset.level = 0;
     startNewGame();
 };
@@ -271,7 +269,6 @@ var firstLevel = function () {
 
 // Start the next level
 var nextLevel = function () {
-    console.log("nextlevel")
     mapset.level++;
     startNewGame();
 };
@@ -280,7 +277,6 @@ var nextLevel = function () {
 
 // Back to previous level
 var prevLevel = function () {
-    console.log("prevlevel")
     mapset.level--;
     startNewGame();
 };
@@ -391,7 +387,6 @@ var clearRandomBlock = function (block_type, count) {
 
 // Check if blocks should fall down
 var fallDown = function () {
-    console.log("fallDown")
     var changes = 0;
     for (var i=0; i<board_width; i++) {
         var fallDist = 0;
@@ -496,7 +491,6 @@ var checkSubsequentOnColumns = function (mark) {
 
 // Checks board for 3 or more subsequent jewels
 var checkForSubsequentJewels = function (mark) {
-    console.log("-- checkForSubsequentJewels")
     var changes = 0;
 
     // Check rows for subsequent items
@@ -652,7 +646,6 @@ var spawnNewJewels = function () {
 // Called when "stuff has changed", i.e. movement stopped, jewels
 // destroyed, ...
 var onChanges = function () {
-    console.log("onChanges")
     if (finalAnim) {
         finalAnim++;
         if (finalAnim >= finalDeleted && okDialog.isClosed()) {

@@ -18,6 +18,7 @@
 */
 
 import QtQuick 2.0
+import Sailfish.Silica 1.0
 //import QtQuick.Particles 2.0
 
 import "qrc:///js/constants.js" as Constants
@@ -60,7 +61,7 @@ Item {
         width: jewel.width; height: jewel.width
 
         source: "qrc:///images/" + typeName
-                                 + (mainPage.isRunning && type?"-blink":"")
+                                 //+ (mainPage.isRunning && type?"-blink":"")
                                  + ".png"
         opacity: 1
 
@@ -109,7 +110,9 @@ Item {
 
     function animationChanged() {
         if (!yAnimation.running && !xAnimation.running)
+        {
             mainPage.animDone();
+        }
     }
 
     function jewelKilled() {
@@ -118,19 +121,21 @@ Item {
 
     Behavior on y {
         enabled: spawned;
-        SmoothedAnimation {
+        //SmoothedAnimation {
+         NumberAnimation {
             id: yAnimation
             duration: 500
-            onRunningChanged: animationChanged();
+            onRunningChanged: if (!running) animationChanged();
         }
     }
 
     Behavior on x {
         enabled: spawned;
-        SmoothedAnimation {
+        // SmoothedAnimation {
+        NumberAnimation {
             id: xAnimation
             duration: 500
-            onRunningChanged: animationChanged();
+            onRunningChanged: if (!running) animationChanged();
         }
     }
 

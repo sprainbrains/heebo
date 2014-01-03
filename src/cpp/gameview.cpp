@@ -35,7 +35,7 @@ GameView::GameView(QQuickView *view) : QQuickView(), view(view) {
   connect(m_mapset, SIGNAL(levelChanged()), this, SLOT(onLevelChanged()));
 
   view->rootContext()->setContextProperty("mapset", m_mapset);
-//  view->rootContext()->setContextProperty("gameview", this);
+  view->rootContext()->setContextProperty("gameview", this);
 
 }
 
@@ -53,14 +53,12 @@ QString GameView::platform() const {
 //------------------------------------------------------------------------------
 
 void GameView::onLevelChanged() {
-    qDebug() << "levelChanged";
   writeSettings();
 }
 
 //------------------------------------------------------------------------------
 
 void GameView::writeSettings() {
-    qDebug() << "writeSettings";
   QSettings s("heebo", "heebo");
   s.beginGroup("Mapset");
   s.setValue("level", m_mapset->level());
@@ -70,7 +68,6 @@ void GameView::writeSettings() {
 //------------------------------------------------------------------------------
 
 void GameView::readSettings() {
-    qDebug() << "readSettings";
   QSettings s("heebo", "heebo");
   s.beginGroup("Mapset");
   m_level = s.value("level", 0).toInt();
