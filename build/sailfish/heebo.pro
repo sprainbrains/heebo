@@ -1,10 +1,12 @@
 # -*- makefile -*-
 
-TEMPLATE = app
+#TEMPLATE = app
 TARGET = heebo
-DEPENDPATH += .
-INCLUDEPATH += .
-QT += qml quick
+CONFIG += sailfishapp
+
+#DEPENDPATH += .
+#INCLUDEPATH += .
+#QT += qml quick
 OBJECTS_DIR = obj
 
 # Input
@@ -15,4 +17,10 @@ SOURCES += ../../src/cpp/gameview.cpp ../../src/cpp/heebo.cpp		\
            ../../src/cpp/gamemapset.cpp ../../src/cpp/gamemap.cpp
 
 RESOURCES +=  ../../game60.qrc ../../common.qrc ../../desktop.qrc
+
+OTHER_FILES += \
+    ./heebo.desktop \
+    rpm/heebo.yaml \
+    rpm/heebo.spec \
+    heebo.png
 
