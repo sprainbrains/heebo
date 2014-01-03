@@ -61,9 +61,11 @@ Item {
         width: jewel.width; height: jewel.width
 
         source: "qrc:///images/" + typeName
-                                 //+ (mainPage.isRunning && type?"-blink":"")
+                                 + (mainPage.isRunning && type?"-blink":"")
                                  + ".png"
         opacity: 1
+
+        smooth: true
 
         Behavior on opacity {
             NumberAnimation { properties:"opacity"; duration: 200 }
@@ -124,7 +126,7 @@ Item {
         //SmoothedAnimation {
          NumberAnimation {
             id: yAnimation
-            duration: 500
+            duration: 350
             onRunningChanged: if (!running) animationChanged();
         }
     }
@@ -134,7 +136,7 @@ Item {
         // SmoothedAnimation {
         NumberAnimation {
             id: xAnimation
-            duration: 500
+            duration: 350
             onRunningChanged: if (!running) animationChanged();
         }
     }
