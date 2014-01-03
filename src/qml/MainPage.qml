@@ -20,7 +20,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-/* import "qrc:///js/constants.js" as Constants */
+import "qrc:///js/constants.js" as Constants
 import "qrc:///js/jewels.js" as Jewels
 
 //JewelPage {
@@ -72,7 +72,8 @@ Page {
     Item {
         id: background;
         width: parent.width
-        anchors { top: parent.top; bottom: toolBar.top }
+        //anchors { top: parent.top; bottom: toolBar.top }
+        anchors { bottom: parent.bottom; top: toolBar.bottom;}
 
         MouseArea {
             anchors.fill: parent

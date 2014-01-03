@@ -9,7 +9,7 @@ var block_width  = 90;
 var block_height = 90;
 
 // height of toolbar
-var toolbar_height = 100;
+var toolbar_height = 150;
 
 var tool_bar_left_margin = 135;
 var level_margin_1digit_offset = 10;
