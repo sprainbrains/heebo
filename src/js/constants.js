@@ -38,11 +38,12 @@ var move_limit = 5;
 // Font settings
 var font_family = "Arial";
 var fontsize_dialog = 22;
-var fontsize_main = 36;
+var fontsize_main = 48; // was 36
 
-var color_uiaccent = "#D800D8";
+var color_uiaccent =  "#D800D8";
 var color_dark = "#333333";
 var color_main = "#F2F2F2";
+
 
 //-----------------------------------------------------------------------------
 // Dialog messages
@@ -94,7 +95,7 @@ var heebo_version = "Sailfish 0.3 beta";
 var heebo_description =
     "Simple and addictive Match 3 game with quirky characters.";
 var heebo_copyright
-    = "Copyright 2012 &copy; Mats Sjöberg, Niklas Gustafsson<br/><br/>"+
+    = "Copyright 2012,2014 &copy; Mats Sjöberg, Niklas Gustafsson<br/><br/>"+
 "All the source code and game level maps for Heebo are licensed under GPLv3. All graphics are licensed under CC-BY-SA.<br/><br/>The source code can be downloaded from <a style=\"color: "+color_uiaccent+"\" href=\"http://gitorious.org/heebo\">http://gitorious.org/heebo</a><br/><br/>";
 
 var code_license =

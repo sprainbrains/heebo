@@ -101,27 +101,27 @@ Page {
                 text: Jewels.toolbar_level_text
                 font.family: Jewels.font_family
                 font.pixelSize: Jewels.fontsize_main
-                color: Jewels.color_uiaccent
+                color: Theme.highlightColor //Jewels.color_uiaccent
             }
             Text {
                 id: currentLevelText
                 text: "??"
                 font.family: Jewels.font_family
                 font.pixelSize: Jewels.fontsize_main
-                color: Jewels.color_main
+                color: Theme.primaryColor //Jewels.color_main
             }                
             Text {
                 text: "/"
                 font.family: Jewels.font_family
                 font.pixelSize: Jewels.fontsize_main
-                color: Jewels.color_uiaccent
+                color: Theme.highlightColor //Jewels.color_uiaccent
             }                
             Text {
                 id: lastLevelText
                 text: "??"
                 font.family: Jewels.font_family
                 font.pixelSize: Jewels.fontsize_main
-                color: Jewels.color_main
+                color: Theme.primaryColor //Jewels.color_main
             }                
         }
         Image {

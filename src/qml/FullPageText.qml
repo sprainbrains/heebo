@@ -18,7 +18,7 @@
 */
 
 import QtQuick 2.0
-
+import Sailfish.Silica 1.0
 import "qrc:///js/constants.js" as Constants
 
 Text {
@@ -31,7 +31,7 @@ Text {
                     24
     font.bold: style === "title" || style === "header" || style == "emphasis"
     font.family: Constants.font_family
-    color: Constants.color_info
+    color: Theme.primaryColor //Constants.color_info
 
     textFormat: Text.RichText
     wrapMode: Text.Wrap
