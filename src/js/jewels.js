@@ -163,6 +163,7 @@ var newBlock = function (j, i, type) {
     obj.locked = 0;
     obj.type = type;
     obj.spawned = true;
+    obj.particleSystem = background.ps;
     board[j][i] = obj;
 };
 
@@ -331,7 +332,7 @@ var isRunning = function () {
             var obj = board[j][i];
             if (obj === undefined)
                 continue;
-            if (obj.xAnim.running || obj.yAnim.running || obj.dAnim.running)
+            if (obj.xAnim.running || obj.yAnim.running /*|| obj.dAnim.running*/)
                 running = true;
         }
     }
@@ -634,6 +635,7 @@ var spawnNewJewels = function () {
 
             obj.type = random(1, jewel_maxtype);
             obj.spawned = true;
+            obj.particleSystem = background.ps;
             board[n-j-1][i] = obj;
             obj.y = block_height*(n-j-1);
         }

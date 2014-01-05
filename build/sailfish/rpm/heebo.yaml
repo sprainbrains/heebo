@@ -1,7 +1,7 @@
 Name: heebo
 Summary: Heebo for jolla
 Version: 0.1
-Release: 4
+Release: 5
 Group: Qt/Qt
 URL: http://example.org/
 License: LICENSE
@@ -18,6 +18,7 @@ PkgConfigBR:
 - sailfishapp >= 0.0.10
 Requires:
 - sailfishsilica-qt5 >= 0.10.9
+- qt5-qtdeclarative-import-particles2
 Files:
 - '%{_bindir}'
 - '%{_datadir}/%{name}/qml'

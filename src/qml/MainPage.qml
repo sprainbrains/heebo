@@ -18,6 +18,7 @@
 */
 
 import QtQuick 2.0
+import QtQuick.Particles 2.0
 import Sailfish.Silica 1.0
 
 import "qrc:///js/constants.js" as Constants
@@ -25,7 +26,7 @@ import "qrc:///js/jewels.js" as Jewels
 
 Page {
     id: mainPage
-    
+
     property real buttonOffset: 0.0
 
     property bool isRunning: false
@@ -62,6 +63,9 @@ Page {
 
     Item {
         id: background;
+
+        property ParticleSystem ps: particleSystem
+
         width: parent.width
         anchors { bottom: parent.bottom; top: toolBar.bottom;}
 
@@ -69,6 +73,45 @@ Page {
             anchors.fill: parent
             onPressed: Jewels.mousePressed(mouse.x, mouse.y)
             onPositionChanged: if (pressed) Jewels.mouseMoved(mouse.x, mouse.y)
+        }
+
+        ParticleSystem {
+            id: particleSystem
+            z: 5
+            running: Qt.application.active
+            anchors.centerIn: parent
+            Component.onDestruction: console.log("particleSystem destroyed")
+            Component.onCompleted: console.log("particleSystem ready")
+            ImageParticle {
+                groups: ["circle"]
+                system: particleSystem
+                source: "qrc:///images/particle_circle.png"
+                alpha: 0.1
+            }
+            ImageParticle {
+                groups: ["polygon"]
+                system: particleSystem
+                source: "qrc:///images/particle_polygon.png"
+                alpha: 0.1
+            }
+            ImageParticle {
+                groups: ["square"]
+                system: particleSystem
+                source: "qrc:///images/particle_square.png"
+                alpha: 0.1
+            }
+            ImageParticle {
+                groups: ["triangle_down"]
+                system: particleSystem
+                source: "qrc:///images/particle_triangle_down.png"
+                alpha: 0.1
+            }
+            ImageParticle {
+                groups: ["triangle_up"]
+                system: particleSystem
+                source: "qrc:///images/particle_triangle_up.png"
+                alpha: 0.1
+            }
         }
     }
 
@@ -173,7 +216,8 @@ Page {
         }
 
         Behavior on opacity {
-            SmoothedAnimation { velocity: 2.0 }
+            //SmoothedAnimation { velocity: 2.0 }
+            NumberAnimation { duration: 500 }
         }
     }
 

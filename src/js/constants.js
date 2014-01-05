@@ -91,12 +91,12 @@ var last_level_answer = "ZÖMG!!";
 // About
 //-----------------------------------------------------------------------------
 
-var heebo_version = "Sailfish 0.1-4";
+var heebo_version = "Sailfish 0.1-5";
 var heebo_description =
     "Simple and addictive Match 3 game with quirky characters.";
 var heebo_copyright
-    = "Copyright 2012,2014 &copy; Mats Sjöberg, Niklas Gustafsson<br/><br/>"+
-"All the source code and game level maps for Heebo are licensed under GPLv3. All graphics are licensed under CC-BY-SA.<br/><br/>The source code can be downloaded from <a style=\"color: "+color_uiaccent+"\" href=\"http://gitorious.org/heebo\">http://gitorious.org/heebo</a><br/><br/>Sailfish version from <a style=\"color: "+color_uiaccent+"\" href=\"https://github.com/kimmoli/heebo\">https://github.com/kimmoli/heebo</a><br/><br/>";
+    = "Copyright 2012,2014 &copy; Mats Sjöberg, Niklas Gustafsson, Kimmo Lindholm<br/><br/>"+
+"All the source code and game level maps for Heebo are licensed under GPLv3. All graphics are licensed under CC-BY-SA.<br/><br/>The source code can be downloaded from <a style=\"color: "+color_uiaccent+"\" href=\"http://gitorious.org/heebo\">http://gitorious.org/heebo</a><br/><br/>Sailfish version from<br/><a style=\"color: "+color_uiaccent+"\" href=\"https://github.com/kimmoli/heebo\">https://github.com/kimmoli/heebo</a><br/><br/>";
 
 var code_license =
     "This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.<br/><br/>"+

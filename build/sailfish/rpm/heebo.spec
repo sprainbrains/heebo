@@ -14,13 +14,14 @@ Name:       heebo
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Heebo for jolla
 Version:    0.1
-Release:    4
+Release:    5
 Group:      Qt/Qt
 License:    LICENSE
 URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  heebo.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
+Requires:   qt5-qtdeclarative-import-particles2
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Core)
