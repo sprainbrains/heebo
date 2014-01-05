@@ -1,7 +1,7 @@
 # -*- makefile -*-
 
 #TEMPLATE = app
-TARGET = heebo
+TARGET = harbour-heebo
 CONFIG += sailfishapp
 
 DEPENDPATH += .
@@ -19,10 +19,10 @@ SOURCES += ../../src/cpp/gameview.cpp ../../src/cpp/heebo.cpp		\
 RESOURCES +=   ../../common.qrc ../../desktop.qrc ../../game60.qrc
 
 OTHER_FILES += \
-    ./heebo.desktop \
+    ./harbour-heebo.desktop \
     rpm/heebo.yaml \
-    rpm/heebo.spec \
-    heebo.png \
+    harbour-heebo.png \
     qml/wrapper.qml \
-    qml/cover/CoverPage.qml
+    qml/cover/CoverPage.qml \
+    rpm/harbour-heebo.spec
 
