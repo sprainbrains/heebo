@@ -22,17 +22,12 @@ import Sailfish.Silica 1.0
 
 import "qrc:///js/constants.js" as Constants
 
-//FullPage {
 Page {
     id: mainPage
     SilicaFlickable {
         id: flickList
-//        anchors { top: parent.top;
-//                  left: parent.left; right: parent.right }
         anchors.fill: parent
-        //height: parent.height-99
         clip: true
-//        flickableDirection: Flickable.VerticalFlick
         contentWidth: parent.width
         contentHeight: logoImage.height + versionText.paintedHeight +
         cred1Text.paintedHeight + cred2Text.paintedHeight +
@@ -90,7 +85,4 @@ Page {
         }
 
     }
-//    ScrollBar {
-//        flickableItem: flickList
-//    }
 }

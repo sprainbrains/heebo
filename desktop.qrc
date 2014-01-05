@@ -5,7 +5,7 @@
         <file alias="qml/ScrollBar.qml">src/qml/desktop/ScrollBar.qml</file>
         <file alias="qml/ToolBarExitButton.qml">src/qml/harmattan/ToolBarExitButton.qml</file>
         <file alias="js/constants_platform.js">src/js/constants_symbian.js</file>
-        <file alias="/images/heebo.png">images/sailfish/heebo.png</file>
         <file alias="/images/bg.png">images/sailfish/bg.png</file>
+        <file alias="/images/heebo.png">images/sailfish/Heebo_switcher_tile_Jolla_01.png</file>
     </qresource>
 </RCC>

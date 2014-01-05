@@ -29,12 +29,6 @@
 
 int main(int argc, char *argv[])
 {
-
-
-//    qmlRegisterType<GameView>("heebo.GameView", 1, 0, "GameView");
-
-//    QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
-//    QScopedPointer<QQuickView> view(SailfishApp::createView());
     QGuiApplication *app(SailfishApp::application(argc, argv));
     QQuickView *view(SailfishApp::createView());
 

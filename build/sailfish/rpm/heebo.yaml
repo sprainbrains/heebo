@@ -1,14 +1,14 @@
 Name: heebo
 Summary: Heebo for jolla
 Version: 0.1
-Release: 3
+Release: 4
 Group: Qt/Qt
 URL: http://example.org/
 License: LICENSE
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |-
-  Heebo port to jolla
+  Simple and addictive Match 3 game with quirky characters.
 Configure: none
 Builder: qtc5
 PkgConfigBR:

@@ -23,7 +23,6 @@ import Sailfish.Silica 1.0
 import "qrc:///js/constants.js" as Constants
 import "qrc:///js/jewels.js" as Jewels
 
-//JewelPage {
 Page {
     id: mainPage
     
@@ -36,8 +35,6 @@ Page {
     signal animDone()
     signal jewelKilled();
     
-    //SystemPalette { id: activePalette }
-
     Component.onCompleted: {
         Jewels.init();
         animDone.connect(Jewels.onChanges);
@@ -48,12 +45,6 @@ Page {
 
     function openFile(file) {
         pageStack.push(Qt.resolvedUrl(file))
-//        var component = Qt.createComponent(file)
-
-//        if (component.status == Component.Ready)
-//            pageStack.push(component);
-//        else
-//            console.log("Error loading component:", component.errorString());
     }
 
     JewelDialog {
@@ -72,7 +63,6 @@ Page {
     Item {
         id: background;
         width: parent.width
-        //anchors { top: parent.top; bottom: toolBar.top }
         anchors { bottom: parent.bottom; top: toolBar.bottom;}
 
         MouseArea {
@@ -85,9 +75,6 @@ Page {
     ToolBar {
         id: toolBar
 
-//        ToolBarExitButton {
-//            id: backButton
-//        }
 
         Row {
             anchors {

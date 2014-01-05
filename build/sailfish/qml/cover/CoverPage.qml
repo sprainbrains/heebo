@@ -6,13 +6,5 @@ CoverBackground {
     Image {
          source: "qrc:///images/heebo.png"
          anchors.centerIn: parent
-         Label
-         {
-             anchors.bottom: parent.top
-             anchors.horizontalCenter: parent.horizontalCenter
-             font.pixelSize: 50
-             text: "Heebo"
-         }
-
      }
 }

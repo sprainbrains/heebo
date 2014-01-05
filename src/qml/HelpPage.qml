@@ -22,19 +22,13 @@ import Sailfish.Silica 1.0
 
 import "../js/constants.js" as Constants
 
-//FullPage {
 Page {
     id: mainPage
 
     SilicaFlickable {
         id: flickList
         anchors.fill: parent
-
-//        anchors { top: parent.top;
-//                  left: parent.left; right: parent.right }
-//        height: parent.height-99
         clip: true
-//        flickableDirection: Flickable.VerticalFlick
         contentWidth: parent.width
         contentHeight: titleText.paintedHeight +
                        help_topic_1.paintedHeight + help_text_1.paintedHeight +
@@ -42,15 +36,18 @@ Page {
                        help_topic_3.paintedHeight + help_text_3.paintedHeight +
                        help_topic_4.paintedHeight + help_text_4.paintedHeight +
                        help_text_5.paintedHeight + 30*11
+
+        PageHeader
+        {
+            title: "Heebo HELP"
+        }
         
         FullPageText {
             id: titleText
-            text: "HELP"
+            text: " "
             style: "header"
-
             anchors.top: parent.top
         }
-
         FullPageText {
             id: help_topic_1
             text: Constants.heebo_help_topic_1
@@ -114,8 +111,4 @@ Page {
         }
 
     }
-//    ScrollBar {
-//        flickableItem: flickList
-//    }
-
 }
