@@ -39,7 +39,6 @@ GameView::GameView(QQuickView *view) : QQuickView(), view(view) {
 
 }
 
-
 //------------------------------------------------------------------------------
 
 QString GameView::platform() const {

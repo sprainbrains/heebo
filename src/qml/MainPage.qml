@@ -119,7 +119,34 @@ Page {
         id: toolBar
 
 
+        BackgroundItem {
+            anchors.fill: currentLevel
+            onDownChanged: {
+                if (down)
+                    longPress.restart()
+                else
+                    longPress.stop()
+            }
+
+            Timer {
+                id: longPress
+                interval: 1000
+                running: false
+                repeat: false
+                onTriggered: {
+                     var dialog = pageStack.push(Qt.resolvedUrl("qrc:///qml/SelectLevel.qml"),
+                                           { "level": currentLevelText.text,
+                                             "maxLevels": lastLevelText.text })
+                     dialog.accepted.connect( function()
+                     {
+                         Jewels.setLevel(dialog.level)
+                     } )
+                 }
+            }
+        }
+
         Row {
+            id: currentLevel
             anchors {
                 left: parent.left
                 verticalCenter: parent.verticalCenter
@@ -139,21 +166,22 @@ Page {
                 font.family: Jewels.font_family
                 font.pixelSize: Jewels.fontsize_main
                 color: Theme.primaryColor //Jewels.color_main
-            }                
+            }
             Text {
                 text: "/"
                 font.family: Jewels.font_family
                 font.pixelSize: Jewels.fontsize_main
                 color: Theme.highlightColor //Jewels.color_uiaccent
-            }                
+            }
             Text {
                 id: lastLevelText
                 text: "??"
                 font.family: Jewels.font_family
                 font.pixelSize: Jewels.fontsize_main
                 color: Theme.primaryColor //Jewels.color_main
-            }                
+            }
         }
+
         Image {
             id: menuButton
             source: "qrc:///images/icon_menu.png"

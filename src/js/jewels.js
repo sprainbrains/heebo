@@ -267,6 +267,15 @@ var firstLevel = function () {
 
 //-----------------------------------------------------------------------------
 
+// Restart with the selected level
+
+var setLevel = function (lvl) {
+    mapset.level = lvl-1;
+	startNewGame();
+}
+
+//-----------------------------------------------------------------------------
+
 // Start the next level
 var nextLevel = function () {
     mapset.level++;

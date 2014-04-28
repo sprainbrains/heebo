@@ -59,7 +59,6 @@ int GameMapSet::setLevel(int l) {
 
   return m_level;
 }
-
 //------------------------------------------------------------------------------
 
 QString GameMapSet::at(int r, int c) const {
