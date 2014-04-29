@@ -190,6 +190,7 @@ var newBackgroundBlock = function (j, i) {
 var startNewGame = function () {
     currentLevelText.text = mapset.level+1;
     mainPage.currentElapsedTime = 0;
+    currentBestTimeText.text = mapset.getHighScore(mapset.level);
     lastLevelText.text = mapset.numLevels;
     mainPage.isRunning = false;
     finalAnim = 0;

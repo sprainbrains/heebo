@@ -92,6 +92,7 @@ Image {
             anchors {
                 verticalCenter: answerItem.verticalCenter
                 left: answerItem.left
+                leftMargin: 25
             }
         }
 

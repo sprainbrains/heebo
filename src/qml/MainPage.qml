@@ -197,16 +197,46 @@ Page {
                 Text {
                     text: "Time: "
                     font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_main -6
+                    font.pixelSize: Jewels.fontsize_main/2
                     color: Theme.highlightColor
                 }
                 Text {
                     id: currentElapsedTimeText
-                    text: currentElapsedTime + " s"
+                    text: currentElapsedTime
                     font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_main -6
+                    font.pixelSize: Jewels.fontsize_main/2
                     color: Theme.primaryColor
                 }
+                Text {
+                    text: " s"
+                    font.family: Jewels.font_family
+                    font.pixelSize: Jewels.fontsize_main/2
+                    color: Theme.highlightColor
+                }
+
+                Text {
+                    visible: (currentBestTimeText.text != "0")
+                    text: " Best: "
+                    font.family: Jewels.font_family
+                    font.pixelSize: Jewels.fontsize_main/2
+                    color: Theme.highlightColor
+                }
+                Text {
+                    id: currentBestTimeText
+                    visible: (currentBestTimeText.text != "0")
+                    text: "0"
+                    font.family: Jewels.font_family
+                    font.pixelSize: Jewels.fontsize_main/2
+                    color: Theme.primaryColor
+                }
+                Text {
+                    visible: (currentBestTimeText.text != "0")
+                    text: " s"
+                    font.family: Jewels.font_family
+                    font.pixelSize: Jewels.fontsize_main/2
+                    color: Theme.highlightColor
+                }
+
                 Timer {
                     running: (!tintRectangle.visible && (mainMenu.opacity == 0) && applicationActive && (mainPage.status === PageStatus.Active))
                     repeat: true
@@ -353,28 +383,12 @@ Page {
                 buttonImage: "qrc:///images/icon_help.png"
                 pressedButtonImage: "qrc:///images/icon_help_pressed.png"
                 onClicked: { mainMenu.hide(); openFile("qrc:///qml/HelpPage.qml") }
-                /* For testing levels... */
-//                onClicked: { mainMenu.hide(); Jewels.nextLevel() }
             }
             MenuButton {
                 text: "About"
                 buttonImage: "qrc:///images/icon_about.png"
                 pressedButtonImage: "qrc:///images/icon_about_pressed.png"
                 onClicked: { mainMenu.hide(); openFile("qrc:///qml/AboutPage.qml") }
-                /* For testing levels... */
-//                onClicked: { mainMenu.hide(); Jewels.prevLevel() }
-                /* For testing dialogs */
-//                onClicked: {
-//                    mainMenu.hide();
-//                    okDialog.mode = 42;
-//                    /*okDialog.show(Jewels.level_text[dt],
-//                                  Jewels.level_answer[dt]);*/
-//                     okDialog.show(Jewels.last_level_msg,
-//                                   Jewels.last_level_answer);
-//                    dt++;
-//                    if (dt == Jewels.level_text_num)
-//                      dt = 0;
-//                }
             }
         }
     }
