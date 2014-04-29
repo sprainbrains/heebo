@@ -162,10 +162,41 @@ void GameMapSet::swapMaps(int i, int j) {
     m_maps.swap(i, j);
 }
 
-//------------------------------------------------------------------------------
 
-void GameMapSet::storeHighScore(int level, int time)
+//------------------------------------------------------------------------------
+// Store highscore if it was not stored, or it is smaller than existing
+// returns the old highscore, or 0 if new level
+int GameMapSet::storeHighScore(int level, int time)
 {
-    qDebug() << "storeHighscore(" << level << ", " << time << ")";
-    emit newHighScore(level, time);
+    int tmp;
+
+    QSettings s("heebo", "heebo");
+    s.beginGroup("Highscores");
+
+    tmp = s.value(QString("level%1").arg(level), 0).toInt();
+
+    if ((tmp == 0) || (time < tmp))
+        s.setValue(QString("level%1").arg(level), time);
+
+    qDebug() << "Level: " << level << ", new score: " << time << ", old score: " << tmp;
+
+    s.endGroup();
+
+    return tmp;
+}
+
+//------------------------------------------------------------------------------
+// Get stored highscore for specific level. Return 0 if no score
+int GameMapSet::getHighScore(int level)
+{
+    int tmp;
+
+    QSettings s("heebo", "heebo");
+    s.beginGroup("Highscores");
+    tmp = s.value(QString("level%1").arg(level), 0).toInt();
+    s.endGroup();
+
+    qDebug() << "Level: " << level << ", score: " << tmp;
+
+    return tmp;
 }

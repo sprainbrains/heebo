@@ -52,6 +52,8 @@ var color_main = "#F2F2F2";
 var level_text_num = 7;
 var level_text = [];
 var level_answer = [];
+var level_fail_text_num = 2
+var level_fail_text = [];
 
 level_text[0]   = "ZÖMG! You just cleared that level! "+
                   "The next one won't be that easy!";
@@ -80,6 +82,13 @@ level_answer[5] = "Bring it on, baby!";
 level_text[6]   = "NOM! That level was just for starters! "+
                   "The next one will be the real lunch!";
 level_answer[6] = "I’m still hungry!";
+
+level_fail_text[0]   = "ZÖMG! You didn't beat best time! "+
+                  "You might want to try again?";
+
+level_fail_text[1]   = "OH NOES! That level was tricky for you! "+
+                  "Need more practice ?!";
+
 
 
 var last_level_msg    = "That was the last level!\n"+

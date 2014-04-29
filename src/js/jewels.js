@@ -325,11 +325,22 @@ var victoryCheck = function () {
             }
             finalDeleted = counter;
         } else {
-            okDialog.mode = 0;
-            var dt = random(0,level_text_num-1);
-            okDialog.show(level_text[dt], level_answer[dt]);
+            var dt = 0;
             console.log("Your time was " + mainPage.currentElapsedTime +" sec")
-            mapset.storeHighScore(mapset.level, mainPage.currentElapsedTime)
+            var oldScore = mapset.storeHighScore(mapset.level, mainPage.currentElapsedTime)
+            if ((mainPage.currentElapsedTime < oldScore) || (oldScore === 0))
+            {
+                okDialog.mode = 0;
+                dt = random(0,level_text_num-1);
+                okDialog.show(level_text[dt], level_answer[dt]);
+            }
+            else
+            {
+                okDialog.mode = 3;
+                dt = random(0,level_fail_text_num-1);
+                okDialog.show(level_fail_text[dt], "");
+            }
+
         }
     }
 };
@@ -733,6 +744,10 @@ var dialogClosed = function (mode) {
     case 2: // after no-more-moves notification
         tintRectangle.hide();
         reshuffleBlocks();
+        break;
+    case 3: // restart same level
+        tintRectangle.hide();
+        startNewGame();
         break;
     default:
         console.log("dialogClosed("+mode+"): unknown dialog mode.");

@@ -55,7 +55,8 @@ public:
 
   GameMap* map(int l);
 
-  Q_INVOKABLE void storeHighScore(int level, int time);
+  Q_INVOKABLE int storeHighScore(int level, int time);
+  Q_INVOKABLE int getHighScore(int level);
 
 public slots:
   QString at(int r, int c) const;
@@ -63,7 +64,6 @@ public slots:
 
 signals:
   void levelChanged();
-  void newHighScore(int level, int time);
 
 private:
   void loadMap();

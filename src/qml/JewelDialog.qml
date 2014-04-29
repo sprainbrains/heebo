@@ -36,9 +36,9 @@ Image {
         container.opened()
     }
 
-    function hide() {
+    function hide( newMode) {
         container.opacity = 0;
-        container.closed(mode);
+        container.closed(newMode);
     }
 
     function isClosed() {
@@ -80,7 +80,7 @@ Image {
             bottomMargin: 25
         }
 
-        width: answerText.paintedWidth + buttonImage.paintedWidth+50
+        width: parent.width //answerText.paintedWidth + buttonImage.paintedWidth+50
         height: 84
         
         Text {
@@ -101,17 +101,50 @@ Image {
 
             anchors {
                 verticalCenter: answerItem.verticalCenter
-                left: answerText.right
+                right: parent.right
+                rightMargin: 30
+            }
+        }
+        Image {
+            id: retryButtonImage
+            visible: (mode == 3)
+            source: "qrc:///images/icon_next_black.png"
+            rotation: 180
+
+            anchors {
+                verticalCenter: answerItem.verticalCenter
+                left: parent.left
                 leftMargin: 30
             }
         }
+
     }
 
     MouseArea {
         id: mouseArea
-        anchors.fill: parent
-        onClicked: container.hide()
+        height: parent.height
+        width: (mode == 3) ? parent.width/2 : parent.width
+        anchors {
+            right: parent.right
+            top: parent.top
+        }
+        onClicked: container.hide( (mode == 3) ? 0 : mode )
         onPressed: buttonImage.source="qrc:///images/icon_next_pressed.png"
         onReleased: buttonImage.source="qrc:///images/icon_next_black.png"
     }
+
+    MouseArea {
+        id: mouseAreaLeft
+        enabled: (mode == 3)
+        height: parent.height
+        width: parent.width/2
+        anchors {
+            left: parent.left
+            top: parent.top
+        }
+        onClicked: container.hide( mode )
+        onPressed: retryButtonImage.source="qrc:///images/icon_next_pressed.png"
+        onReleased: retryButtonImage.source="qrc:///images/icon_next_black.png"
+    }
+
 }
