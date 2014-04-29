@@ -21,7 +21,7 @@
         <file alias="/images/icon_next_white.png">images/icon_next_white.png</file>
         <file alias="/images/icon_restart.png">images/icon_restart.png</file>
         <file alias="/images/icon_restart_pressed.png">images/icon_restart_pressed.png</file>
-        <file>map.dat</file>
+        <file>map1.dat</file>
         <file alias="js/jewels.js">src/js/jewels.js</file>
         <file alias="js/constants.js">src/js/constants.js</file>
         <file alias="qml/Jewel.qml">src/qml/Jewel.qml</file>
@@ -33,6 +33,8 @@
         <file alias="qml/FullPageText.qml">src/qml/FullPageText.qml</file>
         <file alias="qml/AboutPage.qml">src/qml/AboutPage.qml</file>
         <file alias="qml/HelpPage.qml">src/qml/HelpPage.qml</file>
-        <file alias="qml/SelectLevel.qml">src/qml/SelectLevel.qml</file>
+        <file alias="qml/SettingsDialog.qml">src/qml/SettingsDialog.qml</file>
+        <file alias="qml/BestTimesDialog.qml">src/qml/BestTimesDialog.qml</file>
+        <file>map2.dat</file>
     </qresource>
 </RCC>

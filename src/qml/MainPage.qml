@@ -120,35 +120,6 @@ Page {
     ToolBar {
         id: toolBar
 
-
-            BackgroundItem {
-                anchors.fill: currentLevel
-
-                onDownChanged: {
-                    if (down)
-                        longPress.restart()
-                    else
-                        longPress.stop()
-                }
-
-                Timer {
-                    id: longPress
-                    interval: 1000
-                    running: false
-                    repeat: false
-                    onTriggered: {
-                         var dialog = pageStack.push(Qt.resolvedUrl("qrc:///qml/SelectLevel.qml"),
-                                               { "level": currentLevelText.text,
-                                                 "maxLevels": lastLevelText.text })
-                         dialog.accepted.connect( function()
-                         {
-                             Jewels.setLevel(dialog.level)
-                         } )
-                     }
-                }
-            }
-
-
             Row {
                 id: currentLevel
                 anchors {
@@ -362,7 +333,7 @@ Page {
         Grid {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
-            spacing: 10
+            spacing: 6
             columns: 2
 
             MenuButton {
@@ -389,6 +360,33 @@ Page {
                 buttonImage: "qrc:///images/icon_about.png"
                 pressedButtonImage: "qrc:///images/icon_about_pressed.png"
                 onClicked: { mainMenu.hide(); openFile("qrc:///qml/AboutPage.qml") }
+            }
+            MenuButton {
+                text: "Settings"
+                buttonImage: "qrc:///images/icon_about.png"
+                pressedButtonImage: "qrc:///images/icon_about_pressed.png"
+                onClicked: {
+                    mainMenu.hide();
+                    var dialog = pageStack.push(Qt.resolvedUrl("qrc:///qml/SettingsDialog.qml"),
+                                          { "level": currentLevelText.text,
+                                            "maxLevels": lastLevelText.text,
+                                            "map": Jewels.getMap() })
+                    dialog.accepted.connect( function()
+                    {
+                        Jewels.setLevel(dialog.level)
+                        Jewels.changeMap(dialog.map)
+                    } )
+                }
+            }
+            MenuButton {
+                text: "Best times"
+                buttonImage: "qrc:///images/icon_about.png"
+                pressedButtonImage: "qrc:///images/icon_about_pressed.png"
+                onClicked: {
+                    mainMenu.hide();
+                    pageStack.push(Qt.resolvedUrl("qrc:///qml/BestTimesDialog.qml"),
+                                                { "maxLevels": lastLevelText.text } )
+                }
             }
         }
     }

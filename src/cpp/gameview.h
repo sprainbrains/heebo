@@ -47,6 +47,7 @@ private:
 
   GameMapSet* m_mapset;
   int m_level;
+  int m_mapNumber;
 
 };
 

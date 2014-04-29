@@ -55,8 +55,10 @@ public:
 
   GameMap* map(int l);
 
-  Q_INVOKABLE int storeHighScore(int level, int time);
-  Q_INVOKABLE int getHighScore(int level);
+  Q_INVOKABLE int storeHighScore(int map, int level, int time);
+  Q_INVOKABLE int getHighScore(int map, int level);
+  Q_INVOKABLE void writeNewMap(int map);
+  Q_INVOKABLE int getMap();
 
 public slots:
   QString at(int r, int c) const;
@@ -76,6 +78,7 @@ private:
 
   int m_width, m_height, m_number;
   int m_level; // current level
+  int m_map;
 };
 
 #endif /* _GAMEMAPSET_H_ */

@@ -30,7 +30,7 @@ GameView::GameView(QQuickView *view) : QQuickView(), view(view) {
 
   readSettings();
 
-  m_mapset = new GameMapSet(":/map.dat", m_level, this);
+  m_mapset = new GameMapSet(QString(":/map%1.dat").arg(m_mapNumber), m_level, this);
 
   connect(m_mapset, SIGNAL(levelChanged()), this, SLOT(onLevelChanged()));
 
@@ -61,6 +61,7 @@ void GameView::writeSettings() {
   QSettings s("heebo", "heebo");
   s.beginGroup("Mapset");
   s.setValue("level", m_mapset->level());
+  s.setValue("map", m_mapNumber);
   s.endGroup();
 }
 
@@ -70,6 +71,9 @@ void GameView::readSettings() {
   QSettings s("heebo", "heebo");
   s.beginGroup("Mapset");
   m_level = s.value("level", 0).toInt();
+  m_mapNumber = s.value("map", 1).toInt();
+  qDebug() << "level " << m_level;
+  qDebug() << "map " << m_mapNumber;
   s.endGroup();
 }
 

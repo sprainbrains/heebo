@@ -33,8 +33,10 @@ GameMapSet::GameMapSet(const QString& fileName, int initialLevel,
   QObject(parent),
   m_fileName(fileName)
 {
-  loadMap();
-  setLevel(initialLevel);
+    qDebug() << "Loading map: " << m_fileName;
+    loadMap();
+    setLevel(initialLevel);
+    m_map = 0;
 }
 
 //------------------------------------------------------------------------------
@@ -102,6 +104,9 @@ void GameMapSet::loadMap() {
       break;
     }
   }
+
+  qDebug() << "Reading maps: " << m_number << "Height: " << m_height << "Width: " << m_width;
+
   for (int i=0; i<m_number; i++) {
     GameMap* gm = GameMap::fromTextStream(in, m_width, m_height);
     m_maps.append(gm);
@@ -166,19 +171,19 @@ void GameMapSet::swapMaps(int i, int j) {
 //------------------------------------------------------------------------------
 // Store highscore if it was not stored, or it is smaller than existing
 // returns the old highscore, or 0 if new level
-int GameMapSet::storeHighScore(int level, int time)
+int GameMapSet::storeHighScore(int map, int level, int time)
 {
     int tmp;
 
     QSettings s("heebo", "heebo");
     s.beginGroup("Highscores");
 
-    tmp = s.value(QString("level%1").arg(level), 0).toInt();
+    tmp = s.value(QString("map%1level%2").arg(map).arg(level), 0).toInt();
 
     if ((tmp == 0) || (time < tmp))
-        s.setValue(QString("level%1").arg(level), time);
+        s.setValue(QString("map%1level%2").arg(map).arg(level), time);
 
-    qDebug() << "Level: " << level << ", new score: " << time << ", old score: " << tmp;
+    qDebug() << "Map: " << map << "Level: " << level << ", new score: " << time << ", old score: " << tmp;
 
     s.endGroup();
 
@@ -187,16 +192,41 @@ int GameMapSet::storeHighScore(int level, int time)
 
 //------------------------------------------------------------------------------
 // Get stored highscore for specific level. Return 0 if no score
-int GameMapSet::getHighScore(int level)
+int GameMapSet::getHighScore(int map, int level)
 {
     int tmp;
 
     QSettings s("heebo", "heebo");
     s.beginGroup("Highscores");
-    tmp = s.value(QString("level%1").arg(level), 0).toInt();
+    tmp = s.value(QString("map%1level%2").arg(map).arg(level), 0).toInt();
     s.endGroup();
 
-    qDebug() << "Level: " << level << ", score: " << tmp;
+    qDebug() << "Map: " << map << "Level: " << level << ", score: " << tmp;
 
     return tmp;
+}
+
+//------------------------------------------------------------------------------
+// Change map, taken into use at next restart
+void GameMapSet::writeNewMap(int map) {
+  QSettings s("heebo", "heebo");
+  s.beginGroup("Mapset");
+  s.setValue("level", 0); /* Reset level just in case */
+  s.setValue("map", map);
+  s.endGroup();
+}
+
+//------------------------------------------------------------------------------
+// Return current map in use
+// Store locally, just in case that player changes map, but doesn't restart
+int GameMapSet::getMap()
+{
+    if (m_map == 0)
+    {
+        QSettings s("heebo", "heebo");
+        s.beginGroup("Mapset");
+        m_map = s.value("map", 1).toInt();
+        s.endGroup();
+    }
+    return m_map;
 }

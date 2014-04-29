@@ -185,12 +185,29 @@ var newBackgroundBlock = function (j, i) {
 };
 
 //-----------------------------------------------------------------------------
+var getHighScore = function (level) {
+   return mapset.getHighScore(mapset.getMap(), level);
+}
+
+//-----------------------------------------------------------------------------
+var changeMap = function(map) {
+
+    console.log("Trying to change map " + map)
+    mapset.writeNewMap(map);
+}
+
+//-----------------------------------------------------------------------------
+var getMap = function() {
+    return mapset.getMap();
+}
+
+//-----------------------------------------------------------------------------
 
 // Starts new level
 var startNewGame = function () {
     currentLevelText.text = mapset.level+1;
     mainPage.currentElapsedTime = 0;
-    currentBestTimeText.text = mapset.getHighScore(mapset.level);
+    currentBestTimeText.text = mapset.getHighScore(mapset.getMap(), mapset.level);
     lastLevelText.text = mapset.numLevels;
     mainPage.isRunning = false;
     finalAnim = 0;
@@ -328,7 +345,7 @@ var victoryCheck = function () {
         } else {
             var dt = 0;
             console.log("Your time was " + mainPage.currentElapsedTime +" sec")
-            var oldScore = mapset.storeHighScore(mapset.level, mainPage.currentElapsedTime)
+            var oldScore = mapset.storeHighScore(mapset.getMap(), mapset.level, mainPage.currentElapsedTime)
             if ((mainPage.currentElapsedTime < oldScore) || (oldScore === 0))
             {
                 okDialog.mode = 0;
