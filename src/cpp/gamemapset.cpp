@@ -161,3 +161,11 @@ void GameMapSet::swapMaps(int i, int j) {
   if (OK(i) && OK(j))
     m_maps.swap(i, j);
 }
+
+//------------------------------------------------------------------------------
+
+void GameMapSet::storeHighScore(int level, int time)
+{
+    qDebug() << "storeHighscore(" << level << ", " << time << ")";
+    emit newHighScore(level, time);
+}

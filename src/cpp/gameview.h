@@ -37,6 +37,7 @@ public slots:
   QString platform() const;
   void onLevelChanged();
   void quitApp();
+  void onNewHighScore(int level, int time);
 
 private:
 

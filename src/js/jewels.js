@@ -189,6 +189,7 @@ var newBackgroundBlock = function (j, i) {
 // Starts new level
 var startNewGame = function () {
     currentLevelText.text = mapset.level+1;
+    mainPage.currentElapsedTime = 0;
     lastLevelText.text = mapset.numLevels;
     mainPage.isRunning = false;
     finalAnim = 0;
@@ -327,6 +328,8 @@ var victoryCheck = function () {
             okDialog.mode = 0;
             var dt = random(0,level_text_num-1);
             okDialog.show(level_text[dt], level_answer[dt]);
+            console.log("Your time was " + mainPage.currentElapsedTime +" sec")
+            mapset.storeHighScore(mapset.level, mainPage.currentElapsedTime)
         }
     }
 };

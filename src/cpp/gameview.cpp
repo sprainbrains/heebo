@@ -33,6 +33,7 @@ GameView::GameView(QQuickView *view) : QQuickView(), view(view) {
   m_mapset = new GameMapSet(":/map.dat", m_level, this);
 
   connect(m_mapset, SIGNAL(levelChanged()), this, SLOT(onLevelChanged()));
+  connect(m_mapset, SIGNAL(newHighScore(int, int)), this, SLOT(onNewHighScore(int, int)));
 
   view->rootContext()->setContextProperty("mapset", m_mapset);
   view->rootContext()->setContextProperty("gameview", this);
@@ -78,4 +79,16 @@ void GameView::readSettings() {
 void GameView::quitApp() {
   writeSettings();
   qApp->quit();
+}
+
+//------------------------------------------------------------------------------
+
+void GameView::onNewHighScore(int level, int time)
+{
+    qDebug() << "suspect to store new highscore on " << level << " with time " << time;
+    QSettings s("heebo", "heebo");
+    s.beginGroup("Highscores");
+    s.setValue(QString("level%1").arg(level), time);
+    s.endGroup();
+
 }

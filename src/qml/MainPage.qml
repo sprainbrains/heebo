@@ -31,6 +31,8 @@ Page {
 
     property bool isRunning: false
 
+    property int currentElapsedTime: 0
+
     property int dt: 0
     
     signal animDone()
@@ -119,68 +121,100 @@ Page {
         id: toolBar
 
 
-        BackgroundItem {
-            anchors.fill: currentLevel
-            onDownChanged: {
-                if (down)
-                    longPress.restart()
-                else
-                    longPress.stop()
+            BackgroundItem {
+                anchors.fill: currentLevel
+
+                onDownChanged: {
+                    if (down)
+                        longPress.restart()
+                    else
+                        longPress.stop()
+                }
+
+                Timer {
+                    id: longPress
+                    interval: 1000
+                    running: false
+                    repeat: false
+                    onTriggered: {
+                         var dialog = pageStack.push(Qt.resolvedUrl("qrc:///qml/SelectLevel.qml"),
+                                               { "level": currentLevelText.text,
+                                                 "maxLevels": lastLevelText.text })
+                         dialog.accepted.connect( function()
+                         {
+                             Jewels.setLevel(dialog.level)
+                         } )
+                     }
+                }
             }
 
-            Timer {
-                id: longPress
-                interval: 1000
-                running: false
-                repeat: false
-                onTriggered: {
-                     var dialog = pageStack.push(Qt.resolvedUrl("qrc:///qml/SelectLevel.qml"),
-                                           { "level": currentLevelText.text,
-                                             "maxLevels": lastLevelText.text })
-                     dialog.accepted.connect( function()
-                     {
-                         Jewels.setLevel(dialog.level)
-                     } )
-                 }
-            }
-        }
 
-        Row {
-            id: currentLevel
-            anchors {
-                left: parent.left
-                verticalCenter: parent.verticalCenter
-                leftMargin: Jewels.tool_bar_left_margin +
-                            (currentLevelText.text.length == 1 ? Jewels.level_margin_1digit_offset : 0)
-            }
+            Row {
+                id: currentLevel
+                anchors {
+                    left: parent.left
+                    verticalCenter: parent.verticalCenter
+                    verticalCenterOffset: -(Jewels.fontsize_main/2)
+                    leftMargin: Jewels.tool_bar_left_margin +
+                                (currentLevelText.text.length == 1 ? Jewels.level_margin_1digit_offset : 0)
+                }
 
-            Text {
-                text: Jewels.toolbar_level_text
-                font.family: Jewels.font_family
-                font.pixelSize: Jewels.fontsize_main
-                color: Theme.highlightColor //Jewels.color_uiaccent
+                Text {
+                    text: Jewels.toolbar_level_text
+                    font.family: Jewels.font_family
+                    font.pixelSize: Jewels.fontsize_main
+                    color: Theme.highlightColor //Jewels.color_uiaccent
+                }
+                Text {
+                    id: currentLevelText
+                    text: "??"
+                    font.family: Jewels.font_family
+                    font.pixelSize: Jewels.fontsize_main
+                    color: Theme.primaryColor //Jewels.color_main
+                }
+                Text {
+                    text: "/"
+                    font.family: Jewels.font_family
+                    font.pixelSize: Jewels.fontsize_main
+                    color: Theme.highlightColor //Jewels.color_uiaccent
+                }
+                Text {
+                    id: lastLevelText
+                    text: "??"
+                    font.family: Jewels.font_family
+                    font.pixelSize: Jewels.fontsize_main
+                    color: Theme.primaryColor //Jewels.color_main
+                }
             }
-            Text {
-                id: currentLevelText
-                text: "??"
-                font.family: Jewels.font_family
-                font.pixelSize: Jewels.fontsize_main
-                color: Theme.primaryColor //Jewels.color_main
+            Row {
+                id: elapsedTime
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    verticalCenterOffset: Jewels.fontsize_main/2
+                    horizontalCenter: currentLevel.horizontalCenter
+                }
+
+                Text {
+                    text: "Time: "
+                    font.family: Jewels.font_family
+                    font.pixelSize: Jewels.fontsize_main -6
+                    color: Theme.highlightColor
+                }
+                Text {
+                    id: currentElapsedTimeText
+                    text: currentElapsedTime + " s"
+                    font.family: Jewels.font_family
+                    font.pixelSize: Jewels.fontsize_main -6
+                    color: Theme.primaryColor
+                }
+                Timer {
+                    running: (!tintRectangle.visible && (mainMenu.opacity == 0) && applicationActive && (mainPage.status === PageStatus.Active))
+                    repeat: true
+                    interval: 1000
+                    onTriggered: currentElapsedTime++
+                }
+
             }
-            Text {
-                text: "/"
-                font.family: Jewels.font_family
-                font.pixelSize: Jewels.fontsize_main
-                color: Theme.highlightColor //Jewels.color_uiaccent
-            }
-            Text {
-                id: lastLevelText
-                text: "??"
-                font.family: Jewels.font_family
-                font.pixelSize: Jewels.fontsize_main
-                color: Theme.primaryColor //Jewels.color_main
-            }
-        }
 
         Image {
             id: menuButton
