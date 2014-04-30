@@ -109,8 +109,7 @@ Image {
         Image {
             id: retryButtonImage
             visible: (mode == 3)
-            source: "qrc:///images/icon_next_black.png"
-            rotation: 180
+            source: "qrc:///images/icon_back_black.png"
 
             anchors {
                 verticalCenter: answerItem.verticalCenter
@@ -144,8 +143,8 @@ Image {
             top: parent.top
         }
         onClicked: container.hide( mode )
-        onPressed: retryButtonImage.source="qrc:///images/icon_next_pressed.png"
-        onReleased: retryButtonImage.source="qrc:///images/icon_next_black.png"
+        onPressed: retryButtonImage.source="qrc:///images/icon_back_pressed.png"
+        onReleased: retryButtonImage.source="qrc:///images/icon_back_black.png"
     }
 
 }
