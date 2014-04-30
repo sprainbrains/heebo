@@ -675,6 +675,19 @@ var spawnNewJewels = function () {
 };
 
 //-----------------------------------------------------------------------------
+var penalty = function () {
+    do
+    {
+        var n = random(1, board_height-1); // Locking on top row is too cruel
+        var i = random(0, board_width-1);
+    }
+    while (board[n][i] === undefined || bg_grid[n][i].blocking === true);
+
+    if (board[n][i].locked < 2)
+        board[n][i].locked++;
+}
+
+//-----------------------------------------------------------------------------
 
 // Called when "stuff has changed", i.e. movement stopped, jewels
 // destroyed, ...
@@ -712,6 +725,11 @@ var onChanges = function () {
 
             moving1.obj.moveToBlock(moving1.bpt);
             if (moving2.obj !== undefined) {
+                if (mainPage.penalty)
+                {
+                    console.log("PENALTY FLICK");
+                    penalty();
+                }
                 moving2.obj.moveToPoint(moving2.oldPt);
             }
         }

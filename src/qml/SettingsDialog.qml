@@ -26,6 +26,8 @@ Dialog
     property int level
     property int maxLevels
     property int map
+    property bool penalty
+    property bool particles
 
     id: settings
 
@@ -37,6 +39,8 @@ Dialog
         {
             level = levelSlider.value
             map = mapSlider.value
+            penalty = penaltySwitch.checked
+            particles = particleSwitch.checked
         }
     }
 
@@ -45,7 +49,8 @@ Dialog
         id: column
 
         width: parent.width
-        spacing: Theme.paddingLarge
+        spacing: Theme.paddingSmall
+
         DialogHeader
         {
         }
@@ -83,12 +88,31 @@ Dialog
             valueText: (value == 1) ? "Standard" : "Extras"
         }
 
-        Label {
+        Label
+        {
             visible: map != mapSlider.value
             x: Theme.paddingLarge
             font.pixelSize: Theme.fontSizeMedium
             anchors.horizontalCenter: parent.horizontalCenter
             text: "Note! Map change needs Heebo restart!"
+        }
+        SectionHeader
+        {
+            text: "Other"
+        }
+        TextSwitch
+        {
+            id: penaltySwitch
+            text: "Penalty"
+            description: "Get punished from wrong flicks"
+            checked: penalty
+        }
+        TextSwitch
+        {
+            id: particleSwitch
+            text: "Explöde"
+            description: "Animations when blocks explodes"
+            checked: particles
         }
 
 

@@ -33,6 +33,9 @@ Page {
 
     property int currentElapsedTime: 0
 
+    property bool particles: true
+    property bool penalty: false
+
     property int dt: 0
     
     signal animDone()
@@ -80,7 +83,7 @@ Page {
         ParticleSystem {
             id: particleSystem
             z: 5
-            running: Qt.application.active
+            running: Qt.application.active & particles
             anchors.centerIn: parent
             Component.onDestruction: console.log("particleSystem destroyed")
             Component.onCompleted: console.log("particleSystem ready")
@@ -370,11 +373,19 @@ Page {
                     var dialog = pageStack.push(Qt.resolvedUrl("qrc:///qml/SettingsDialog.qml"),
                                           { "level": currentLevelText.text,
                                             "maxLevels": lastLevelText.text,
-                                            "map": Jewels.getMap() })
+                                            "map": Jewels.getMap(),
+                                            "penalty": penalty,
+                                            "particles": particles})
                     dialog.accepted.connect( function()
                     {
-                        Jewels.setLevel(dialog.level)
-                        Jewels.changeMap(dialog.map)
+                        if (currentLevelText.text != dialog.level)
+                            Jewels.setLevel(dialog.level)
+                        if (Jewels.getMap() != dialog.map)
+                            Jewels.changeMap(dialog.map)
+                        penalty = dialog.penalty
+                        particles = dialog.particles
+                        console.log("Penalty " + (penalty ? "on" : "off"))
+                        console.log("Particles " + (particles ? "on" : "off"))
                     } )
                 }
             }
