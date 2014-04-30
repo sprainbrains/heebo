@@ -161,35 +161,35 @@ Page {
                 id: elapsedTime
                 anchors {
                     verticalCenter: parent.verticalCenter
-                    verticalCenterOffset: Jewels.fontsize_main/2
+                    verticalCenterOffset: Jewels.fontsize_time
                     horizontalCenter: currentLevel.horizontalCenter
                 }
 
                 Text {
                     text: "Time: "
                     font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_main/2
+                    font.pixelSize: Jewels.fontsize_time
                     color: Theme.highlightColor
                 }
                 Text {
                     id: currentElapsedTimeText
                     text: currentElapsedTime
                     font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_main/2
+                    font.pixelSize: Jewels.fontsize_time
                     color: Theme.primaryColor
                 }
                 Text {
                     text: " s"
                     font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_main/2
+                    font.pixelSize: Jewels.fontsize_time
                     color: Theme.highlightColor
                 }
 
                 Text {
                     visible: (currentBestTimeText.text != "0")
-                    text: " Best: "
+                    text: " - Best: "
                     font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_main/2
+                    font.pixelSize: Jewels.fontsize_time
                     color: Theme.highlightColor
                 }
                 Text {
@@ -197,14 +197,14 @@ Page {
                     visible: (currentBestTimeText.text != "0")
                     text: "0"
                     font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_main/2
+                    font.pixelSize: Jewels.fontsize_time
                     color: Theme.primaryColor
                 }
                 Text {
                     visible: (currentBestTimeText.text != "0")
                     text: " s"
                     font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_main/2
+                    font.pixelSize: Jewels.fontsize_time
                     color: Theme.highlightColor
                 }
 

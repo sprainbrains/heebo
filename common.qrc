@@ -36,5 +36,6 @@
         <file alias="qml/SettingsDialog.qml">src/qml/SettingsDialog.qml</file>
         <file alias="qml/BestTimesDialog.qml">src/qml/BestTimesDialog.qml</file>
         <file>map2.dat</file>
+        <file alias="js/scores.js">src/js/scores.js</file>
     </qresource>
 </RCC>

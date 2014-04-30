@@ -38,7 +38,9 @@ var move_limit = 5;
 // Font settings
 var font_family = "Arial";
 var fontsize_dialog = 22;
-var fontsize_main = 48; // was 36
+var fontsize_time = 27;
+var fontsize_besttime = 36;
+var fontsize_main = 48;
 
 var color_uiaccent =  "#D800D8";
 var color_dark = "#333333";

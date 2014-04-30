@@ -1,5 +1,6 @@
 /*
   Copyright 2012 Mats Sjöberg
+  Copyright 2014 Kimmo Lindholm
   
   This file is part of the Heebo programme.
   
@@ -19,6 +20,8 @@
 
 //-----------------------------------------------------------------------------
 Qt.include("qrc:///js/constants.js")
+Qt.include("qrc:///js/scores.js")
+
 
 //-----------------------------------------------------------------------------
 
@@ -184,22 +187,6 @@ var newBackgroundBlock = function (j, i) {
     bg_grid[j][i] = obj;
 };
 
-//-----------------------------------------------------------------------------
-var getHighScore = function (level) {
-   return mapset.getHighScore(mapset.getMap(), level);
-}
-
-//-----------------------------------------------------------------------------
-var changeMap = function(map) {
-
-    console.log("Trying to change map " + map)
-    mapset.writeNewMap(map);
-}
-
-//-----------------------------------------------------------------------------
-var getMap = function() {
-    return mapset.getMap();
-}
 
 //-----------------------------------------------------------------------------
 
@@ -207,7 +194,7 @@ var getMap = function() {
 var startNewGame = function () {
     currentLevelText.text = mapset.level+1;
     mainPage.currentElapsedTime = 0;
-    currentBestTimeText.text = mapset.getHighScore(mapset.getMap(), mapset.level);
+    currentBestTimeText.text = getHighScore(mapset.level);
     lastLevelText.text = mapset.numLevels;
     mainPage.isRunning = false;
     finalAnim = 0;
@@ -345,7 +332,9 @@ var victoryCheck = function () {
         } else {
             var dt = 0;
             console.log("Your time was " + mainPage.currentElapsedTime +" sec")
-            var oldScore = mapset.storeHighScore(mapset.getMap(), mapset.level, mainPage.currentElapsedTime)
+
+            var oldScore = setHighScore(mapset.level, mainPage.currentElapsedTime)
+
             if ((mainPage.currentElapsedTime < oldScore) || (oldScore === 0))
             {
                 okDialog.mode = 0;
