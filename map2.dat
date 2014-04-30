@@ -136,11 +136,13 @@ WWWWW6
 WOWWW9
 WWWWWW
 #map 11
+# property: 3,1 locked2
 # property: 3,2 locked2
 # property: 3,3 locked2
 # property: 3,4 locked2
-# property: 4,2 locked2
+# property: 4,1 locked2
 # property: 4,4 locked2
+# property: 5,1 locked2
 # property: 5,2 locked2
 # property: 5,3 locked2
 # property: 5,4 locked2

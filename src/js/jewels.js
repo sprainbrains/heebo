@@ -680,8 +680,21 @@ var onChanges = function () {
     if (finalAnim) {
         finalAnim++;
         if (finalAnim >= finalDeleted && okDialog.isClosed()) {
-            okDialog.mode = 1;
-            okDialog.show(last_level_msg, last_level_answer);
+            console.log("Your time was " + mainPage.currentElapsedTime +" sec")
+
+            var oldScore = setHighScore(mapset.level, mainPage.currentElapsedTime)
+
+            if ((mainPage.currentElapsedTime < oldScore) || (oldScore === 0))
+            {
+                okDialog.mode = 1;
+                okDialog.show(last_level_msg, last_level_answer);            }
+            else
+            {
+                okDialog.mode = 4;
+                dt = random(0,level_fail_text_num-1);
+                okDialog.show(level_fail_text[dt], "");
+            }
+
         }
         return;
     }
@@ -753,6 +766,7 @@ var dialogClosed = function (mode) {
         reshuffleBlocks();
         break;
     case 3: // restart same level
+    case 4: // restart same level (last)
         tintRectangle.hide();
         startNewGame();
         break;

@@ -108,7 +108,7 @@ Image {
         }
         Image {
             id: retryButtonImage
-            visible: (mode == 3)
+            visible: ((mode == 3) || (mode == 4))
             source: "qrc:///images/icon_back_black.png"
 
             anchors {
@@ -123,19 +123,19 @@ Image {
     MouseArea {
         id: mouseArea
         height: parent.height
-        width: (mode == 3) ? parent.width/2 : parent.width
+        width: ((mode == 3) || (mode == 4)) ? parent.width/2 : parent.width
         anchors {
             right: parent.right
             top: parent.top
         }
-        onClicked: container.hide( (mode == 3) ? 0 : mode )
+        onClicked: container.hide( (mode == 3) ? 0 : ((mode == 4) ? 1 : mode) )
         onPressed: buttonImage.source="qrc:///images/icon_next_pressed.png"
         onReleased: buttonImage.source="qrc:///images/icon_next_black.png"
     }
 
     MouseArea {
         id: mouseAreaLeft
-        enabled: (mode == 3)
+        enabled: ((mode == 3) || (mode == 4))
         height: parent.height
         width: parent.width/2
         anchors {
