@@ -4,7 +4,7 @@
 # height
 9
 # number of maps
-2
+11
 # map1
 008800
 04WW60
@@ -25,3 +25,131 @@ WWW300
 008800
 04WW60
 002200
+#map 3
+# property: 8,0 locked
+# property: 8,1 locked
+# property: 8,2 locked
+# property: 8,3 locked
+# property: 8,4 locked
+# property: 8,5 locked
+008800
+04WW60
+002200
+000000
+000000
+000000
+000000
+000000
+000000
+#map 4
+000000
+000000
+000000
+000000
+000000
+000000
+888888
+WWWWWW
+222222
+#map 5
+# property: 4,2 locked
+800000
+W60000
+208888
+04WWWW
+001WWW
+000222
+000000
+000000
+000000
+#map 6
+# property: 0,0 locked2
+# property: 1,0 locked2
+# property: 2,0 locked2
+# property: 3,0 locked2
+# property: 4,0 locked2
+# property: 5,0 locked2
+# property: 6,0 locked2
+# property: 7,0 locked2
+# property: 8,0 locked2
+# property: 0,5 locked2
+# property: 1,5 locked2
+# property: 2,5 locked2
+# property: 3,5 locked2
+# property: 4,5 locked2
+# property: 5,5 locked2
+# property: 6,5 locked2
+# property: 7,5 locked2
+# property: 8,5 locked2
+000000
+000000
+000000
+000000
+000000
+000000
+000000
+000000
+000000
+#map 7
+008000
+04W600
+002080
+8004W6
+W60820
+204W60
+000-00
+004W60
+000200
+#map 8
+# property: 2,2 locked
+# property: 6,3 locked
+# property: 4,4 locked
+# property: 5,0 locked
+# property: 8,3 locked
+008000
+04W600
+002080
+8004W6
+W60820
+204W60
+000-00
+004W60
+000200
+#map 9
+080080
+4W64W6
+0-00-0
+4W64W6
+0-00-0
+4W64W6
+0-00-0
+4W64W6
+020020
+#map 10
+000008
+80004W
+W90002
+WW9000
+WWW900
+WWWW90
+WWWWW6
+WOWWW9
+WWWWWW
+#map 11
+# property: 3,2 locked2
+# property: 3,3 locked2
+# property: 3,4 locked2
+# property: 4,2 locked2
+# property: 4,4 locked2
+# property: 5,2 locked2
+# property: 5,3 locked2
+# property: 5,4 locked2
+000000
+000000
+000000
+000000
+000000
+000000
+000000
+000000
+000000
