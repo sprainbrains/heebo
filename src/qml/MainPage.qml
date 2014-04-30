@@ -384,8 +384,15 @@ Page {
                 pressedButtonImage: "qrc:///images/icon_about_pressed.png"
                 onClicked: {
                     mainMenu.hide();
-                    pageStack.push(Qt.resolvedUrl("qrc:///qml/BestTimesDialog.qml"),
+                    var bestis = pageStack.push(Qt.resolvedUrl("qrc:///qml/BestTimesDialog.qml"),
                                                 { "maxLevels": lastLevelText.text } )
+
+                    bestis.accepted.connect ( function()
+                    {
+                        Jewels.updateBestTime(); // Just in case that bets times were cleared
+                        if (bestis.newLevel > 0 )
+                            Jewels.setLevel(bestis.newLevel)
+                    } )
                 }
             }
         }

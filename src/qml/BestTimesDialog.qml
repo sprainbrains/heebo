@@ -25,15 +25,42 @@ import "qrc:///js/constants.js" as Constants
 import "qrc:///js/scores.js" as Scores
 
 
-Page
+Dialog
 {
     id: bestTimes
 
     property int maxLevels
+    property int newLevel: 0
+    property Item contextMenu
 
-    SilicaFlickable
+    Component.onCompleted:
     {
-        anchors.fill: parent
+        var i;
+        for (i=0 ; i<maxLevels ; i++)
+        {
+            myList.append({"score": Scores.getHighScore(i), "level": i+1});
+        }
+    }
+
+    ListModel
+    {
+        id: myList
+    }
+
+
+    SilicaListView
+    {
+        id: listView
+        model: myList
+        width: parent.width
+        height: parent.height
+
+        VerticalScrollDecorator {}
+
+        header: DialogHeader
+        {
+            title: "Best times evö"
+        }
 
         PullDownMenu
         {
@@ -44,74 +71,82 @@ Page
                     var i;
                     for (i=0 ; i < maxLevels; i++ )
                         Scores.setHighScore(i, 0);
-                    pageStack.pop();
+                    newLevel = 0; // Do not change level
+                    bestTimes.accept();
                 }
             }
         }
 
-        contentHeight: column.height
-
-        Column
+        delegate: ListItem
         {
-            id: column
+            id: myListItem
+            menu: contextMenu
+            width: ListView.view.width
 
-            width: parent.width
-            spacing: Theme.paddingLarge
-            PageHeader
+            contentHeight: Theme.itemSizeSmall
+
+            Row
             {
-                title: "Best times evö"
-            }
-            Repeater
-            {
-                model: maxLevels
-                Row
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                Label
                 {
-                    id: thisRow
-                    //width: column.width - Theme.paddingLarge
-                    anchors.horizontalCenter: column.horizontalCenter
-                    property int score : Scores.getHighScore(index)
-
-                    Label
-                    {
-                        text: "Level "
-                        font.family: Constants.font_family
-                        font.pixelSize: Constants.fontsize_besttime
-                        color: Theme.highlightColor
-                    }
-                    Label
-                    {
-                        text: (index+1)
-                        font.family: Constants.font_family
-                        font.pixelSize: Constants.fontsize_besttime
-                        color: Theme.primaryColor
-                    }
-                    Label
-                    {
-                        text: (score > 0) ? " Time " : " No time yet"
-                        font.family: Constants.font_family
-                        font.pixelSize: Constants.fontsize_besttime
-                        color: Theme.highlightColor
-                    }
-                    Label
-                    {
-                        visible: (score > 0)
-                        text: thisRow.score
-                        font.family: Constants.font_family
-                        font.pixelSize: Constants.fontsize_besttime
-                        color: Theme.primaryColor
-                    }
-                    Label
-                    {
-                        visible: (score > 0)
-                        text: " sec"
-                        font.family: Constants.font_family
-                        font.pixelSize: Constants.fontsize_besttime
-                        color: Theme.highlightColor
-                    }
-
+                    text: "Level "
+                    font.family: Constants.font_family
+                    font.pixelSize: Constants.fontsize_besttime
+                    color: Theme.highlightColor
                 }
+                Label
+                {
+                    text: level
+                    font.family: Constants.font_family
+                    font.pixelSize: Constants.fontsize_besttime
+                    color: Theme.primaryColor
+                }
+                Label
+                {
+                    text: (score > 0) ? " Time " : " No time yet"
+                    font.family: Constants.font_family
+                    font.pixelSize: Constants.fontsize_besttime
+                    color: Theme.highlightColor
+                }
+                Label
+                {
+                    visible: (score > 0)
+                    text: score
+                    font.family: Constants.font_family
+                    font.pixelSize: Constants.fontsize_besttime
+                    color: Theme.primaryColor
+                }
+                Label
+                {
+                    visible: (score > 0)
+                    text: " sec"
+                    font.family: Constants.font_family
+                    font.pixelSize: Constants.fontsize_besttime
+                    color: Theme.highlightColor
+                }
+            }
 
+            Component
+            {
+                id: contextMenu
+                ContextMenu
+                {
+                    MenuItem
+                    {
+                        text: "Replay level " + level
+                        onClicked:
+                        {
+                            newLevel = level
+                            console.log("Want to replay level " + level)
+                            bestTimes.accept()
+                        }
+                    }
+                }
             }
         }
     }
 }
+
+

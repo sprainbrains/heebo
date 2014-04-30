@@ -186,8 +186,10 @@ var newBackgroundBlock = function (j, i) {
 
     bg_grid[j][i] = obj;
 };
-
-
+//-----------------------------------------------------------------------------
+var updateBestTime = function () {
+    currentBestTimeText.text = getHighScore(mapset.level);
+}
 //-----------------------------------------------------------------------------
 
 // Starts new level
