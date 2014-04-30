@@ -44,6 +44,7 @@ Page
                     var i;
                     for (i=0 ; i < maxLevels; i++ )
                         Scores.setHighScore(i, 0);
+                    pageStack.pop();
                 }
             }
         }
