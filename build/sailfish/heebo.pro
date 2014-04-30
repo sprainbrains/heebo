@@ -20,7 +20,6 @@ RESOURCES +=   ../../common.qrc ../../desktop.qrc ../../game60.qrc
 
 OTHER_FILES += \
     ./harbour-heebo.desktop \
-    rpm/heebo.yaml \
     harbour-heebo.png \
     qml/wrapper.qml \
     qml/cover/CoverPage.qml \

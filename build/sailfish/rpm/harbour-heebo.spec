@@ -62,7 +62,7 @@ desktop-file-install --delete-original       \
    %{buildroot}%{_datadir}/applications/*.desktop
 
 %files
-%defattr(-,root,root,-)
+%defattr(644,root,root,755)
 /usr/share/icons/hicolor/86x86/apps
 /usr/share/applications
 /usr/share/harbour-heebo
@@ -70,6 +70,6 @@ desktop-file-install --delete-original       \
 %{_datadir}/icons/hicolor/86x86/apps/%{name}.png
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/%{name}/qml
-%{_bindir}
+%attr(755,root,root) %{_bindir}
 # >> files
 # << files
