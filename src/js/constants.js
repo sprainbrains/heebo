@@ -102,7 +102,7 @@ var last_level_answer = "ZÖMG!!";
 // About
 //-----------------------------------------------------------------------------
 
-var heebo_version = "Sailfish 0.1-6";
+var heebo_version = "Sailfish 0.2-0";
 var heebo_description =
     "Simple and addictive Match 3 game with quirky characters.";
 var heebo_copyright
