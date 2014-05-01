@@ -339,7 +339,7 @@ Page {
         Grid {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
-            spacing: 6
+            spacing: 2
             columns: 2
 
             MenuButton {
@@ -356,21 +356,9 @@ Page {
             }
 
             MenuButton {
-                text: "Help"
-                buttonImage: "qrc:///images/icon_help.png"
-                pressedButtonImage: "qrc:///images/icon_help_pressed.png"
-                onClicked: { mainMenu.hide(); openFile("qrc:///qml/HelpPage.qml") }
-            }
-            MenuButton {
-                text: "About"
-                buttonImage: "qrc:///images/icon_about.png"
-                pressedButtonImage: "qrc:///images/icon_about_pressed.png"
-                onClicked: { mainMenu.hide(); openFile("qrc:///qml/AboutPage.qml") }
-            }
-            MenuButton {
                 text: "Settings"
-                buttonImage: "qrc:///images/icon_about.png"
-                pressedButtonImage: "qrc:///images/icon_about_pressed.png"
+                buttonImage: "qrc:///images/icon_settings.png"
+                pressedButtonImage: "qrc:///images/icon_settings_pressed.png"
                 onClicked: {
                     mainMenu.hide();
                     var dialog = pageStack.push(Qt.resolvedUrl("qrc:///qml/SettingsDialog.qml"),
@@ -401,8 +389,8 @@ Page {
             }
             MenuButton {
                 text: "Best times"
-                buttonImage: "qrc:///images/icon_about.png"
-                pressedButtonImage: "qrc:///images/icon_about_pressed.png"
+                buttonImage: "qrc:///images/icon_besttimes.png"
+                pressedButtonImage: "qrc:///images/icon_besttimes_pressed.png"
                 onClicked: {
                     mainMenu.hide();
                     var bestis = pageStack.push(Qt.resolvedUrl("qrc:///qml/BestTimesDialog.qml"),
@@ -416,6 +404,19 @@ Page {
                     } )
                 }
             }
+            MenuButton {
+                text: "Help"
+                buttonImage: "qrc:///images/icon_help.png"
+                pressedButtonImage: "qrc:///images/icon_help_pressed.png"
+                onClicked: { mainMenu.hide(); openFile("qrc:///qml/HelpPage.qml") }
+            }
+            MenuButton {
+                text: "About"
+                buttonImage: "qrc:///images/icon_about.png"
+                pressedButtonImage: "qrc:///images/icon_about_pressed.png"
+                onClicked: { mainMenu.hide(); openFile("qrc:///qml/AboutPage.qml") }
+            }
+
         }
     }
 

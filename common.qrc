@@ -38,5 +38,9 @@
         <file>map2.dat</file>
         <file alias="js/scores.js">src/js/scores.js</file>
         <file alias="/images/icon_back_black.png">images/icon_back_black.png</file>
+        <file alias="/images/icon_besttimes.png">images/icon_besttimes.png</file>
+        <file alias="/images/icon_besttimes_pressed.png">images/icon_besttimes_pressed.png</file>
+        <file alias="/images/icon_settings.png">images/icon_settings.png</file>
+        <file alias="/images/icon_settings_pressed.png">images/icon_settings_pressed.png</file>
     </qresource>
 </RCC>
