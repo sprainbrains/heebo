@@ -33,6 +33,7 @@ GameView::GameView(QQuickView *view) : QQuickView(), view(view) {
   m_mapset = new GameMapSet(QString(":/map%1.dat").arg(m_mapNumber), m_level, this);
 
   connect(m_mapset, SIGNAL(levelChanged()), this, SLOT(onLevelChanged()));
+  connect(m_mapset, SIGNAL(quitHeebo()), this, SLOT(quitApp()));
 
   view->rootContext()->setContextProperty("mapset", m_mapset);
   view->rootContext()->setContextProperty("gameview", this);
@@ -80,7 +81,7 @@ void GameView::readSettings() {
 //------------------------------------------------------------------------------
 
 void GameView::quitApp() {
-  writeSettings();
+  //writeSettings();
   qApp->quit();
 }
 

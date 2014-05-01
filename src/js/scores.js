@@ -35,5 +35,5 @@ var getMap = function() {
 
 //-----------------------------------------------------------------------------
 var setHighScore = function (level, time) {
-    return mapset.storeHighScore(mapset.getMap(), level, time)
+    return mapset.storeHighScore(mapset.getMap(), level, time);
 }

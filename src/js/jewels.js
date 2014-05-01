@@ -298,6 +298,27 @@ var prevLevel = function () {
     startNewGame();
 };
 
+
+//-----------------------------------------------------------------------------
+// Settings
+//
+var getPenaltyMode = function(setting) {
+    console.log("getPenaltyMode");
+    return mapset.getPenaltyMode();
+}
+
+//-----------------------------------------------------------------------------
+var getParticlesMode = function() {
+    console.log("getParticlesMode");
+    return mapset.getParticlesMode();
+}
+
+//-----------------------------------------------------------------------------
+var storeOtherSettings = function(penalty, particles) {
+    mapset.writeOtherSettings(penalty, particles);
+}
+
+
 //-----------------------------------------------------------------------------
 // Main game logic functions, i.e. moving blocks, checking conditions,
 // reacting to events.

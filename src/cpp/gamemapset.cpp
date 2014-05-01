@@ -36,7 +36,11 @@ GameMapSet::GameMapSet(const QString& fileName, int initialLevel,
     qDebug() << "Loading map: " << m_fileName;
     loadMap();
     setLevel(initialLevel);
-    m_map = 0;
+
+    /* Following values are read from settings if they are -1 */
+    m_map = -1;
+    m_penalty = -1;
+    m_particles = -1;
 }
 
 //------------------------------------------------------------------------------
@@ -214,6 +218,8 @@ void GameMapSet::writeNewMap(int map) {
   s.setValue("level", 0); /* Reset level just in case */
   s.setValue("map", map);
   s.endGroup();
+
+  emit quitHeebo();
 }
 
 //------------------------------------------------------------------------------
@@ -221,7 +227,7 @@ void GameMapSet::writeNewMap(int map) {
 // Store locally, just in case that player changes map, but doesn't restart
 int GameMapSet::getMap()
 {
-    if (m_map == 0)
+    if (m_map == -1)
     {
         QSettings s("heebo", "heebo");
         s.beginGroup("Mapset");
@@ -229,4 +235,54 @@ int GameMapSet::getMap()
         s.endGroup();
     }
     return m_map;
+}
+
+//------------------------------------------------------------------------------
+// Penalty and particles are stored as int value, to allow third value
+// -1 = first time after app starts, read them from config
+// 0 = false
+// 1 = true
+// Sequential request are coming from local variable instead of file
+
+//------------------------------------------------------------------------------
+// Store other settings
+void GameMapSet::writeOtherSettings(bool penalty, bool particles)
+{
+    QSettings s("heebo", "heebo");
+    s.beginGroup("Other");
+    s.setValue("penalty", penalty ? 1 : 0);
+    s.setValue("particles", particles ? 1 : 0);
+    s.endGroup();
+    m_penalty = penalty;
+    m_particles = particles;
+}
+
+//------------------------------------------------------------------------------
+// Return penalty mode
+bool GameMapSet::getPenaltyMode()
+{
+    if (m_penalty == -1)
+    {
+        QSettings s("heebo", "heebo");
+        s.beginGroup("Other");
+        m_penalty = s.value("penalty", 0).toInt();
+        s.endGroup();
+        qDebug() << "getPenaltyMode " << m_penalty;
+    }
+    return (m_penalty == 1);
+}
+
+//------------------------------------------------------------------------------
+// Return particles mode
+bool GameMapSet::getParticlesMode()
+{
+    if (m_particles == -1)
+    {
+        QSettings s("heebo", "heebo");
+        s.beginGroup("Other");
+        m_particles = s.value("particles", 1).toInt();
+        s.endGroup();
+        qDebug() << "getParticlesMode " << m_particles;
+    }
+    return (m_particles == 1);
 }

@@ -30,11 +30,11 @@ class GameMapSet : public QObject {
   Q_PROPERTY(int level
              READ level
              NOTIFY levelChanged
-             WRITE setLevel);
+             WRITE setLevel)
   Q_PROPERTY(int numLevels
-             READ numLevels);
+             READ numLevels)
   Q_PROPERTY(bool onLastLevel
-             READ onLastLevel);
+             READ onLastLevel)
   
 public:
   explicit GameMapSet(int width, int height, QObject* parent=0);
@@ -59,6 +59,9 @@ public:
   Q_INVOKABLE int getHighScore(int map, int level);
   Q_INVOKABLE void writeNewMap(int map);
   Q_INVOKABLE int getMap();
+  Q_INVOKABLE void writeOtherSettings(bool penalty, bool particles);
+  Q_INVOKABLE bool getPenaltyMode();
+  Q_INVOKABLE bool getParticlesMode();
 
 public slots:
   QString at(int r, int c) const;
@@ -66,6 +69,7 @@ public slots:
 
 signals:
   void levelChanged();
+  void quitHeebo();
 
 private:
   void loadMap();
@@ -79,6 +83,8 @@ private:
   int m_width, m_height, m_number;
   int m_level; // current level
   int m_map;
+  int m_penalty;
+  int m_particles;
 };
 
 #endif /* _GAMEMAPSET_H_ */

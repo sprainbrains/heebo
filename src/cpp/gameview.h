@@ -32,7 +32,6 @@ Q_OBJECT
 public:
     explicit GameView(QQuickView *view);
 
-
 public slots:
   QString platform() const;
   void onLevelChanged();

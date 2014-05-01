@@ -93,8 +93,18 @@ Dialog
             visible: map != mapSlider.value
             x: Theme.paddingLarge
             font.pixelSize: Theme.fontSizeMedium
+            font.bold: true
             anchors.horizontalCenter: parent.horizontalCenter
-            text: "Note! Map change needs Heebo restart!"
+            text: "ZÖMG! Map change quits Heebo,"
+        }
+        Label
+        {
+            visible: map != mapSlider.value
+            x: Theme.paddingLarge
+            font.pixelSize: Theme.fontSizeMedium
+            font.bold: true
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: "you'll need to restart it!"
         }
         SectionHeader
         {
@@ -114,7 +124,5 @@ Dialog
             description: "Animations when blocks explodes"
             checked: particles
         }
-
-
     }
 }

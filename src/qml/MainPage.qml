@@ -23,6 +23,7 @@ import Sailfish.Silica 1.0
 
 import "qrc:///js/constants.js" as Constants
 import "qrc:///js/jewels.js" as Jewels
+import "qrc:///js/scores.js" as Scores
 
 Page {
     id: mainPage
@@ -47,6 +48,8 @@ Page {
         jewelKilled.connect(Jewels.onChanges);
         okDialog.closed.connect(Jewels.dialogClosed);
         okDialog.opened.connect(tintRectangle.show);
+        particles = Jewels.getParticlesMode();
+        penalty = Jewels.getPenaltyMode();
     }
 
     function openFile(file) {
@@ -380,12 +383,19 @@ Page {
                     {
                         if (currentLevelText.text != dialog.level)
                             Jewels.setLevel(dialog.level)
-                        if (Jewels.getMap() != dialog.map)
-                            Jewels.changeMap(dialog.map)
-                        penalty = dialog.penalty
-                        particles = dialog.particles
+                        if ((penalty !== dialog.penalty) || (particles !== dialog.particles))
+                        {
+                            penalty = dialog.penalty
+                            particles = dialog.particles
+                            Jewels.storeOtherSettings(penalty, particles)
+                        }
                         console.log("Penalty " + (penalty ? "on" : "off"))
                         console.log("Particles " + (particles ? "on" : "off"))
+
+                        /* This as last, as it should shutdown heebo */
+                        if (Jewels.getMap() != dialog.map)
+                            Jewels.changeMap(dialog.map)
+
                     } )
                 }
             }
