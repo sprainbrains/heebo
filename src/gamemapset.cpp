@@ -18,6 +18,7 @@
 */
 
 #include "gamemapset.h"
+#include <sailfishapp.h>
 
 //------------------------------------------------------------------------------
 
@@ -233,7 +234,16 @@ void GameMapSet::writeNewMap(int map)
   s.setValue("map", map);
   s.endGroup();
 
-  emit quitHeebo();
+  //emit quitHeebo();
+
+  m_map = map;
+
+  m_fileName = SailfishApp::pathTo(QString("data/map%1.dat").arg(m_map)).toLocalFile();
+  m_level = 0;
+  m_maps.clear();
+
+  loadMap();
+  setLevel(m_level);
 }
 
 //------------------------------------------------------------------------------

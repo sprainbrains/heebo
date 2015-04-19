@@ -22,11 +22,6 @@ var getHighScore = function (level) {
    return mapset.getHighScore(mapset.getMap(), level);
 }
 
-//-----------------------------------------------------------------------------
-var changeMap = function(map) {
-    console.log("Trying to change map " + map)
-    mapset.writeNewMap(map);
-}
 
 //-----------------------------------------------------------------------------
 var getMap = function() {

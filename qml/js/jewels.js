@@ -298,6 +298,16 @@ var prevLevel = function () {
     startNewGame();
 };
 
+//-----------------------------------------------------------------------------
+
+// Change game map
+
+var changeMap = function(map) {
+    console.log("Trying to change map " + map)
+    mapset.writeNewMap(map);
+    startNewGame();
+}
+
 
 //-----------------------------------------------------------------------------
 // Settings

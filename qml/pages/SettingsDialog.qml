@@ -70,6 +70,9 @@ Dialog
             value: level
             stepSize: 1
             valueText: value
+            enabled: map == mapSlider.value
+            opacity: map == mapSlider.value ? 1.0 : 0.5
+            Behavior on opacity { NumberAnimation { duration: 150 } }
         }
         SectionHeader
         {
@@ -88,24 +91,6 @@ Dialog
             valueText: (value == 1) ? "Standard" : "Extras"
         }
 
-        Label
-        {
-            visible: map != mapSlider.value
-            x: Theme.paddingLarge
-            font.pixelSize: Theme.fontSizeMedium
-            font.bold: true
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: "ZÖMG! Map change quits Heebo,"
-        }
-        Label
-        {
-            visible: map != mapSlider.value
-            x: Theme.paddingLarge
-            font.pixelSize: Theme.fontSizeMedium
-            font.bold: true
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: "you'll need to restart it!"
-        }
         SectionHeader
         {
             text: "Other"
