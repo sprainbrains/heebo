@@ -19,8 +19,6 @@
 
 import QtQuick 2.0
 
-import "../js/constants.js" as Constants
-
 Image {
     id: block
 
@@ -28,20 +26,20 @@ Image {
     property bool blocking: false;
     property string wall_border: "0";
 
-    width: Constants.block_width
-    height: Constants.block_height
+    width: constants.block_width
+    height: constants.block_height
     
     z: blocking ? 1 : -1
     
     source: "../images/"+(blocking ? "block_wall_1" :
                               cleared ? "block_gold" :
-                              "bg" )+".png"
+                              "bg" ) + ".png"
     Image {
         anchors.fill: parent
         opacity: parent.wall_border !== ""
         source: "../images/"+
                 (parent.wall_border==="0" || parent.wall_border==="lock" ?
-                 "empty" : "wb_"+parent.wall_border)+".png"
+                 "empty" : "wb_"+parent.wall_border) + ".png"
         z: 1
     }
 }

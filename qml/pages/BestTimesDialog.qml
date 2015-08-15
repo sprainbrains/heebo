@@ -21,11 +21,9 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-import "../js/constants.js" as Constants
-import "../js/scores.js" as Scores
+import "../js/jewels.js" as Jewels
 
-
-Dialog
+Page
 {
     id: bestTimes
 
@@ -33,12 +31,16 @@ Dialog
     property int newLevel: 0
     property Item contextMenu
 
+    signal accept
+
+    onAccept: pageStack.pop()
+
     Component.onCompleted:
     {
         var i;
         for (i=0 ; i<maxLevels ; i++)
         {
-            myList.append({"score": Scores.getHighScore(i), "level": i+1});
+            myList.append({"score": Jewels.getHighScore(i), "level": i+1});
         }
     }
 
@@ -57,7 +59,7 @@ Dialog
 
         VerticalScrollDecorator {}
 
-        header: DialogHeader
+        header: PageHeader
         {
             title: "Best times evö"
         }
@@ -70,7 +72,7 @@ Dialog
                 onClicked: {
                     var i;
                     for (i=0 ; i < maxLevels; i++ )
-                        Scores.setHighScore(i, 0);
+                        Jewels.setHighScore(i, 0);
                     newLevel = 0; // Do not change level
                     bestTimes.accept();
                 }
@@ -92,38 +94,38 @@ Dialog
                 Label
                 {
                     text: "Level "
-                    font.family: Constants.font_family
-                    font.pixelSize: Constants.fontsize_besttime
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_besttime
                     color: Theme.highlightColor
                 }
                 Label
                 {
                     text: level
-                    font.family: Constants.font_family
-                    font.pixelSize: Constants.fontsize_besttime
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_besttime
                     color: Theme.primaryColor
                 }
                 Label
                 {
                     text: (score > 0) ? " Time " : " No time yet"
-                    font.family: Constants.font_family
-                    font.pixelSize: Constants.fontsize_besttime
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_besttime
                     color: Theme.highlightColor
                 }
                 Label
                 {
                     visible: (score > 0)
                     text: score
-                    font.family: Constants.font_family
-                    font.pixelSize: Constants.fontsize_besttime
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_besttime
                     color: Theme.primaryColor
                 }
                 Label
                 {
                     visible: (score > 0)
                     text: " sec"
-                    font.family: Constants.font_family
-                    font.pixelSize: Constants.fontsize_besttime
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_besttime
                     color: Theme.highlightColor
                 }
             }

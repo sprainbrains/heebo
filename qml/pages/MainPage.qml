@@ -21,9 +21,8 @@ import QtQuick 2.0
 import QtQuick.Particles 2.0
 import Sailfish.Silica 1.0
 
-import "../js/constants.js" as Constants
 import "../js/jewels.js" as Jewels
-import "../js/scores.js" as Scores
+import "../js/utils.js" as Utils
 
 import "../components"
 
@@ -36,22 +35,27 @@ Page {
 
     property int currentElapsedTime: 0
 
-    property bool particles: true
+    property bool particlesEnabled: false
     property bool penalty: false
 
     property int dt: 0
     
     signal animDone()
     signal jewelKilled();
-    
+
     Component.onCompleted: {
+        constants.block_width = Math.min(width / constants.board_width, (height - constants.toolbar_height) / constants.board_height)
+        constants.block_height = constants.block_width
+        console.log("block size is " + constants.block_height + " x " + constants.block_width)
+
+        particlesEnabled = Jewels.getParticlesMode();
+        penalty = Jewels.getPenaltyMode();
+
         Jewels.init();
         animDone.connect(Jewels.onChanges);
         jewelKilled.connect(Jewels.onChanges);
         okDialog.closed.connect(Jewels.dialogClosed);
         okDialog.opened.connect(tintRectangle.show);
-        particles = Jewels.getParticlesMode();
-        penalty = Jewels.getPenaltyMode();
     }
 
     function openFile(file) {
@@ -76,8 +80,8 @@ Page {
 
         property ParticleSystem ps: particleSystem
 
-        width: parent.width
-        anchors { bottom: parent.bottom; top: toolBar.bottom;}
+        width: constants.board_width * constants.block_width
+        anchors { bottom: parent.bottom; top: toolBar.bottom; horizontalCenter: parent.horizontalCenter}
 
         MouseArea {
             anchors.fill: parent
@@ -88,39 +92,42 @@ Page {
         ParticleSystem {
             id: particleSystem
             z: 5
-            running: Qt.application.active & particles
+            running: Qt.application.active & particlesEnabled
             anchors.centerIn: parent
             Component.onDestruction: console.log("particleSystem destroyed")
             Component.onCompleted: console.log("particleSystem ready")
+            onRunningChanged: console.log("particleSystem " + (running ? "started" : "stopped"))
+            onPausedChanged:  console.log("particleSystem " + (paused ? "paused" : "un-paused"))
+
             ImageParticle {
                 groups: ["circle"]
                 system: particleSystem
                 source: "../images/particle_circle.png"
-                alpha: 0.1
+                alpha: 0.5
             }
             ImageParticle {
                 groups: ["polygon"]
                 system: particleSystem
                 source: "../images/particle_polygon.png"
-                alpha: 0.1
+                alpha: 0.5
             }
             ImageParticle {
                 groups: ["square"]
                 system: particleSystem
                 source: "../images/particle_square.png"
-                alpha: 0.1
+                alpha: 0.5
             }
             ImageParticle {
                 groups: ["triangle_down"]
                 system: particleSystem
                 source: "../images/particle_triangle_down.png"
-                alpha: 0.1
+                alpha: 0.5
             }
             ImageParticle {
                 groups: ["triangle_up"]
                 system: particleSystem
                 source: "../images/particle_triangle_up.png"
-                alpha: 0.1
+                alpha: 0.5
             }
         }
     }
@@ -133,35 +140,35 @@ Page {
                 anchors {
                     left: parent.left
                     verticalCenter: parent.verticalCenter
-                    verticalCenterOffset: -(Jewels.fontsize_main/2)
-                    leftMargin: Jewels.tool_bar_left_margin +
-                                (currentLevelText.text.length == 1 ? Jewels.level_margin_1digit_offset : 0)
+                    verticalCenterOffset: -(constants.fontsize_main/2)
+                    leftMargin: constants.tool_bar_left_margin +
+                                (currentLevelText.text.length == 1 ? constants.level_margin_1digit_offset : 0)
                 }
 
                 Text {
-                    text: Jewels.toolbar_level_text
-                    font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_main
+                    text: constants.toolbar_level_text
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_main
                     color: Theme.highlightColor //Jewels.color_uiaccent
                 }
                 Text {
                     id: currentLevelText
                     text: "??"
-                    font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_main
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_main
                     color: Theme.primaryColor //Jewels.color_main
                 }
                 Text {
                     text: "/"
-                    font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_main
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_main
                     color: Theme.highlightColor //Jewels.color_uiaccent
                 }
                 Text {
                     id: lastLevelText
                     text: "??"
-                    font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_main
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_main
                     color: Theme.primaryColor //Jewels.color_main
                 }
             }
@@ -169,50 +176,50 @@ Page {
                 id: elapsedTime
                 anchors {
                     verticalCenter: parent.verticalCenter
-                    verticalCenterOffset: Jewels.fontsize_time
+                    verticalCenterOffset: constants.fontsize_time
                     horizontalCenter: currentLevel.horizontalCenter
                 }
 
                 Text {
                     text: "Time: "
-                    font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_time
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_time
                     color: Theme.highlightColor
                 }
                 Text {
                     id: currentElapsedTimeText
                     text: currentElapsedTime
-                    font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_time
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_time
                     color: Theme.primaryColor
                 }
                 Text {
                     text: " s"
-                    font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_time
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_time
                     color: Theme.highlightColor
                 }
 
                 Text {
                     visible: (currentBestTimeText.text != "0")
                     text: " - Best: "
-                    font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_time
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_time
                     color: Theme.highlightColor
                 }
                 Text {
                     id: currentBestTimeText
                     visible: (currentBestTimeText.text != "0")
                     text: "0"
-                    font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_time
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_time
                     color: Theme.primaryColor
                 }
                 Text {
                     visible: (currentBestTimeText.text != "0")
                     text: " s"
-                    font.family: Jewels.font_family
-                    font.pixelSize: Jewels.fontsize_time
+                    font.family: constants.font_family
+                    font.pixelSize: constants.fontsize_time
                     color: Theme.highlightColor
                 }
 
@@ -228,13 +235,14 @@ Page {
         Image {
             id: menuButton
             source: "../images/icon_menu.png"
-            width: 64; height: 64
+            height: Theme.iconSizeMedium
+            width: Theme.iconSizeMedium
 
             anchors {
                 right: parent.right
                 verticalCenter: parent.verticalCenter
-                verticalCenterOffset: -Jewels.menu_jump*mainPage.buttonOffset
-                rightMargin: 20
+                verticalCenterOffset: -constants.menu_jump*mainPage.buttonOffset
+                rightMargin: Theme.paddingLarge
             }
 
             MouseArea {
@@ -268,7 +276,7 @@ Page {
             var colors = ["#3399FF", "#11FF00", "#7300E6", "#FF3C26",
                           "#B300B3" /*, "#FFD500"*/];
 
-            tintRectangle.color = colors[Jewels.random(0,4)];
+            tintRectangle.color = colors[Utils.random(0,4)];
             tintRectangle.opacity = 0.65;
         }
 
@@ -297,6 +305,8 @@ Page {
         z: 50
 
         source: "../images/main_menu_bg.png"
+
+        scale: (0.6 * parent.width) / sourceSize.width
 
         signal closed
 
@@ -328,7 +338,7 @@ Page {
         anchors {
             horizontalCenter: parent.horizontalCenter
             verticalCenter: parent.verticalCenter
-            verticalCenterOffset: Jewels.main_menu_offset
+            verticalCenterOffset: constants.main_menu_offset
         }
 
         Image {
@@ -368,19 +378,19 @@ Page {
                                             "maxLevels": lastLevelText.text,
                                             "map": Jewels.getMap(),
                                             "penalty": penalty,
-                                            "particles": particles})
+                                            "particles": particlesEnabled})
                     dialog.accepted.connect( function()
                     {
                         if (currentLevelText.text != dialog.level)
                             Jewels.setLevel(dialog.level)
-                        if ((penalty !== dialog.penalty) || (particles !== dialog.particles))
+                        if ((penalty !== dialog.penalty) || (particlesEnabled !== dialog.particles))
                         {
                             penalty = dialog.penalty
-                            particles = dialog.particles
-                            Jewels.storeOtherSettings(penalty, particles)
+                            particlesEnabled = dialog.particles
+                            Jewels.storeOtherSettings(dialog.penalty, dialog.particles)
                         }
                         console.log("Penalty " + (penalty ? "on" : "off"))
-                        console.log("Particles " + (particles ? "on" : "off"))
+                        console.log("Particles " + (particlesEnabled ? "on" : "off"))
 
                         /* This as last, as it should shutdown heebo */
                         if (Jewels.getMap() != dialog.map)
@@ -398,7 +408,7 @@ Page {
                     var bestis = pageStack.push(Qt.resolvedUrl("BestTimesDialog.qml"),
                                                 { "maxLevels": lastLevelText.text } )
 
-                    bestis.accepted.connect ( function()
+                    bestis.accept.connect ( function()
                     {
                         Jewels.updateBestTime(); // Just in case that bets times were cleared
                         if (bestis.newLevel > 0 )

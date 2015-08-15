@@ -19,8 +19,6 @@
 
 import QtQuick 2.0
 
-import "../js/constants.js" as Constants
-
 Image {
     id: container
 
@@ -49,15 +47,17 @@ Image {
     visible: opacity > 0
 
     source: "../images/dialog_small.png"
+    scale: (0.6 * parent.width) / sourceSize.width
+    smooth: true
         
     Text {
         id: dialogText
         text: ""
 
-        font.family: Constants.font_family
-        font.pixelSize: Constants.fontsize_dialog
+        font.family: constants.font_family
+        font.pixelSize: constants.fontsize_dialog
         font.bold: true
-        color: Constants.color_dark
+        color: constants.color_dark
 
         width: container.paintedWidth-60
         wrapMode: Text.Wrap
@@ -86,9 +86,9 @@ Image {
         Text {
             id: answerText
             text: "OK!"
-            font.family: Constants.font_family
-            font.pixelSize: Constants.fontsize_dialog
-            color: Constants.color_uiaccent
+            font.family: constants.font_family
+            font.pixelSize: constants.fontsize_dialog
+            color: constants.color_uiaccent
             anchors {
                 verticalCenter: answerItem.verticalCenter
                 left: answerItem.left

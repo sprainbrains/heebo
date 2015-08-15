@@ -5,4 +5,9 @@ ApplicationWindow
 {
     initialPage: Qt.resolvedUrl("pages/MainPage.qml")
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
+
+    Constants
+    {
+        id: constants
+    }
 }

@@ -19,8 +19,6 @@
 
 import QtQuick 2.0
 
-import "../js/constants.js" as Constants
-
 Item {
     id: container
     
@@ -46,9 +44,9 @@ Item {
     Text {
         id: textComponent
         text: container.text
-        font.family: Constants.font_family
-        color: Constants.color_dark
-        font.pixelSize: Constants.fontsize_dialog
+        font.family: constants.font_family
+        color: constants.color_dark
+        font.pixelSize: constants.fontsize_dialog
 
         anchors {
             top: imageComponent.bottom

@@ -20,8 +20,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-import "../js/constants.js" as Constants
-
 import "../components"
 
 Page {
@@ -52,59 +50,59 @@ Page {
         }
         FullPageText {
             id: help_topic_1
-            text: Constants.heebo_help_topic_1
+            text: constants.heebo_help_topic_1
             style: "title"
             anchors.top: titleText.bottom
         }
 
         FullPageText {
             id: help_text_1
-            text: Constants.heebo_help_1
+            text: constants.heebo_help_1
             anchors.top: help_topic_1.bottom
         }
 
         FullPageText {
             id: help_topic_2
-            text: Constants.heebo_help_topic_2
+            text: constants.heebo_help_topic_2
             style: "title"
             anchors.top: help_text_1.bottom
         }
 
         FullPageText {
             id: help_text_2
-            text: Constants.heebo_help_2
+            text: constants.heebo_help_2
             anchors.top: help_topic_2.bottom
         }
 
         FullPageText {
             id: help_topic_3
-            text: Constants.heebo_help_topic_3
+            text: constants.heebo_help_topic_3
             style: "title"
             anchors.top: help_text_2.bottom
         }
 
         FullPageText {
             id: help_text_3
-            text: Constants.heebo_help_3
+            text: constants.heebo_help_3
             anchors.top: help_topic_3.bottom
         }
 
         FullPageText {
             id: help_topic_4
-            text: Constants.heebo_help_topic_4
+            text: constants.heebo_help_topic_4
             style: "title"
             anchors.top: help_text_3.bottom
         }
 
         FullPageText {
             id: help_text_4
-            text: Constants.heebo_help_4
+            text: constants.heebo_help_4
             anchors.top: help_topic_4.bottom
         }
 
         FullPageText {
             id: help_text_5
-            text: Constants.heebo_help_5
+            text: constants.heebo_help_5
             style: "emphasis"
             anchors.top: help_text_4.bottom
         }

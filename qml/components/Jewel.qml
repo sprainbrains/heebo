@@ -21,13 +21,11 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.Particles 2.0
 
-import "../js/constants.js" as Constants
-
 Item {
     id: jewel
 
-    width: Constants.block_width
-    height: Constants.block_height
+    width: constants.block_width
+    height: constants.block_height
 
     property ParticleSystem particleSystem
 
@@ -63,8 +61,7 @@ Item {
         width: jewel.width; height: jewel.width
 
         source: "../images/" + typeName
-                                 + (mainPage.isRunning && type?"_eyeshut":"")
-                                 + ".png"
+                                 + (mainPage.isRunning && type?"_eyeshut":"") + ".png"
         opacity: 1
 
         smooth: true
@@ -97,25 +94,26 @@ Item {
         lifeSpan: 700; lifeSpanDeviation: 600
         angle: 0; angleDeviation: 360;
         velocity: 100; velocityDeviation: 30
-        source: type == 0 ? "" : "../images/particle_"+typeName+".png"
+        source: type == 0 ? "" : "../images/particle_" + typeName
     }
 */
     Emitter {
         id: particles
         system: particleSystem
         //property Item block: parent
-        anchors.centerIn: parent
+        //anchors.centerIn: parent
+        anchors.fill: parent
         emitRate: 0
         lifeSpan: 500
         lifeSpanVariation: 400
         velocity: AngleDirection {angleVariation: 360; magnitude: 70; magnitudeVariation: 40}
-        size: 16
+        size: Theme.iconSizeSmall * 0.5
         group: typeName
     }
 
     function moveToBlock(pt) {
-        x = pt.x * Constants.block_width;
-        y = pt.y * Constants.block_height
+        x = pt.x * constants.block_width;
+        y = pt.y * constants.block_height
     }
 
     function moveToPoint(pt) {
@@ -139,7 +137,7 @@ Item {
         //SmoothedAnimation {
          NumberAnimation {
             id: yAnimation
-            duration: 350
+            duration: constants.animationDuration
             onRunningChanged: if (!running) animationChanged();
         }
     }
@@ -149,7 +147,7 @@ Item {
         // SmoothedAnimation {
         NumberAnimation {
             id: xAnimation
-            duration: 350
+            duration: constants.animationDuration
             onRunningChanged: if (!running) animationChanged();
         }
     }
@@ -163,7 +161,7 @@ Item {
         State {
             name: "DyingState"
             when: dying == true
-            StateChangeScript { script: { particleSystem.paused = false; particles.burst(20);} }
+            StateChangeScript { script: { particles.burst(20); } }
             PropertyChanges { target: img; opacity: 0 }
             StateChangeScript { script: { jewel.destroy(1000); jewelKilled(); } }
         }

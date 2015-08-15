@@ -6,7 +6,7 @@ Name:       harbour-heebo
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
 Summary:    Heebo for jolla
-Version:    0.2.1
+Version:    0.3.0
 Release:    0
 Group:      Qt/Qt
 License:    LICENSE
@@ -42,11 +42,9 @@ desktop-file-install --delete-original       \
 
 %files
 %defattr(644,root,root,755)
-/usr/share/icons/hicolor/86x86/apps
-/usr/share/applications
-/usr/share/harbour-heebo
-/usr/bin
-%{_datadir}/icons/hicolor/86x86/apps/%{name}.png
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/%{name}/qml
 %attr(755,root,root) %{_bindir}
+%{_datadir}/icons/hicolor/86x86/apps/
+%{_datadir}/applications/
+%{_datadir}/%{name}/qml/
+%{_datadir}/%{name}/data/
+

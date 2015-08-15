@@ -20,8 +20,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-import "../js/constants.js" as Constants
-
 import "../components"
 
 Page {
@@ -47,7 +45,7 @@ Page {
 
         FullPageText {
             id: versionText
-            text: "Version "+Constants.heebo_version
+            text: "Version " + constants.heebo_version
             style: "small"
             anchors.top: logoImage.bottom
             horizontalAlignment: Text.AlignHCenter
@@ -55,7 +53,7 @@ Page {
 
         FullPageText {
             id: cred1Text
-            text: Constants.heebo_credit_coding
+            text: constants.heebo_credit_coding
 
             anchors.top: versionText.bottom
             horizontalAlignment: Text.AlignHCenter
@@ -63,7 +61,7 @@ Page {
 
         FullPageText {
             id: cred2Text
-            text: Constants.heebo_credit_graphics
+            text: constants.heebo_credit_graphics
 
             anchors.top: cred1Text.bottom
             horizontalAlignment: Text.AlignHCenter
@@ -71,14 +69,14 @@ Page {
 
         FullPageText {
             id: copyrightText
-            text: Constants.heebo_copyright
+            text: constants.heebo_copyright
             anchors.top: cred2Text.bottom
             anchors.topMargin: 50
         }
 
         FullPageText {
             id: gplText
-            text: Constants.code_license+"<br/><br/>"+Constants.graphics_license
+            text: constants.code_license+"<br/><br/>"+constants.graphics_license
             style: "small"
             anchors.top: copyrightText.bottom
         }

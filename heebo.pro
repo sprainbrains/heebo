@@ -33,8 +33,11 @@ OTHER_FILES += \
     qml/components/Block.qml \
     qml/components/Jewel.qml \
     qml/cover/CoverPage.qml \
+    qml/Constants.qml \
+    qml/js/jewels.js \
+    qml/js/utils.js \
     qml/images/* \
-    qml/js/* \
-    data/*.dat
+    data/*.dat \
+
 
 

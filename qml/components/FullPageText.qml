@@ -19,7 +19,6 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "../js/constants.js" as Constants
 
 Text {
     property string style: "normal"
@@ -30,7 +29,7 @@ Text {
                     style === "emphasis" ? 26 :
                     24
     font.bold: style === "title" || style === "header" || style == "emphasis"
-    font.family: Constants.font_family
+    font.family: constants.font_family
     color: Theme.primaryColor //Constants.color_info
 
     textFormat: Text.RichText

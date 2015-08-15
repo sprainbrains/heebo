@@ -19,12 +19,10 @@
 
 import QtQuick 2.0
 
-import "../js/constants.js" as Constants
-
 Rectangle {
     id: toolBar
     z: 20
-    width: parent.width; height: Constants.toolbar_height
+    width: parent.width; height: constants.toolbar_height
     //anchors.bottom: parent.bottom
     anchors.top: parent.top
 

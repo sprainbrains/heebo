@@ -19,9 +19,8 @@
 */
 
 //-----------------------------------------------------------------------------
-Qt.include("../js/constants.js")
-Qt.include("../js/scores.js")
 
+Qt.include("../js/utils.js")
 
 //-----------------------------------------------------------------------------
 
@@ -89,7 +88,7 @@ var point = function (spec) {
 
     that.insideGrid = function () {
         return that.x >= 0 && that.y >= 0 &&
-            that.x < board_width && that.y < board_height;
+            that.x < constants.board_width && that.y < constants.board_height;
     };
 
     return that;
@@ -101,12 +100,6 @@ var gridObject = function (grid, pt) {
     return pt.insideGrid() ? grid[pt.y][pt.x] : undefined;
 };
 
-//-----------------------------------------------------------------------------
-
-var random = function (from, to) {
-    return Math.floor(Math.random()*(to-from+1)+from);
-};
-
 
 //-----------------------------------------------------------------------------
 // Functions for setting up the game level, boards and blocks
@@ -116,8 +109,8 @@ var random = function (from, to) {
 var init2DArray = function (arr) {
     // Destroy old 2d array if there is such
     if (arr !== undefined) {
-        for (var i=0; i<board_width; i++) {
-            for (var j=0; j<board_height; j++) {
+        for (var i=0; i<constants.board_width; i++) {
+            for (var j=0; j<constants.board_height; j++) {
                 if (arr[j][i] !== undefined) {
                     arr[j][i].destroy();
                     arr[j][i] = undefined;
@@ -127,9 +120,9 @@ var init2DArray = function (arr) {
         delete arr;
     }
     
-    arr = new Array(board_height);
-    for (var j=0; j<board_height; j++) 
-        arr[j] = new Array(board_width);
+    arr = new Array(constants.board_height);
+    for (var j=0; j<constants.board_height; j++)
+        arr[j] = new Array(constants.board_width);
     return arr;
 };
 
@@ -160,8 +153,8 @@ var newBlock = function (j, i, type) {
     // while (component.status != Component.Ready) {}
     
     var obj = component.createObject(background);
-    obj.x = i*block_width;
-    obj.y = j*block_height;
+    obj.x = i*constants.block_width;
+    obj.y = j*constants.block_height;
 
     obj.locked = 0;
     obj.type = type;
@@ -181,8 +174,8 @@ var newBackgroundBlock = function (j, i) {
     // while (component.status != Component.Ready) {}
     
     var obj = component.createObject(background);
-    obj.x = i*block_width;
-    obj.y = j*block_height;
+    obj.x = i*constants.block_width;
+    obj.y = j*constants.block_height;
 
     bg_grid[j][i] = obj;
 };
@@ -204,14 +197,14 @@ var startNewGame = function () {
     playerMovement = false;
     initBoard();
 
-    for (var j=0; j<board_height; j++)
-        for (var i=0; i<board_width; i++)
+    for (var j=0; j<constants.board_height; j++)
+        for (var i=0; i<constants.board_width; i++)
             newBackgroundBlock(j, i);
 
     unclearedPoints = [];
 
-    for (var j=0; j<board_height; j++) {
-        for (var i=0; i<board_width; i++) {
+    for (var j=0; j<constants.board_height; j++) {
+        for (var i=0; i<constants.board_width; i++) {
             var b = mapset.at(j,i);
             if (b === 'W') {
                 bg_grid[j][i].blocking = true;
@@ -222,8 +215,8 @@ var startNewGame = function () {
         }
     }
 
-    for (var j=0; j<board_height; j++) {
-        for (var i=0; i<board_width; i++) {
+    for (var j=0; j<constants.board_height; j++) {
+        for (var i=0; i<constants.board_width; i++) {
             if (bg_grid[j][i].blocking) {
                 continue;
             }
@@ -240,7 +233,7 @@ var startNewGame = function () {
 
             var type = 0;
             do {
-                type = random(1, jewel_maxtype);
+                type = random(1, constants.jewel_maxtype);
             } while (type === skip1 || type === skip2);
 
             newBlock(j, i, type);
@@ -337,8 +330,8 @@ var storeOtherSettings = function(penalty, particles) {
 // Check victory condition
 var victoryCheck = function () {
     var victory = true;
-    for (var j=0; j<board_height && victory; j++) {
-        for (var i=0; i<board_width && victory; i++) {
+    for (var j=0; j<constants.board_height && victory; j++) {
+        for (var i=0; i<constants.board_width && victory; i++) {
             victory =
                 bg_grid[j][i].cleared || bg_grid[j][i].blocking;
         }
@@ -349,8 +342,8 @@ var victoryCheck = function () {
             finalAnim = 1;
             finalDeleted = 1000;
             var counter = 0;
-            for (j=0; j<board_height; j++) {
-                for (i=0; i<board_width; i++) {
+            for (j=0; j<constants.board_height; j++) {
+                for (i=0; i<constants.board_width; i++) {
                     if (!bg_grid[j][i].blocking && board[j] && board[j][i] &&
                         board[j][i].dying === false) {
                         var obj = board[j][i];
@@ -371,14 +364,14 @@ var victoryCheck = function () {
             if ((mainPage.currentElapsedTime < oldScore) || (oldScore === 0))
             {
                 okDialog.mode = 0;
-                dt = random(0,level_text_num-1);
-                okDialog.show(level_text[dt], level_answer[dt]);
+                dt = random(0,constants.level_text_num-1);
+                okDialog.show(constants.level_text[dt], constants.level_answer[dt]);
             }
             else
             {
                 okDialog.mode = 3;
-                dt = random(0,level_fail_text_num-1);
-                okDialog.show(level_fail_text[dt], "");
+                dt = random(0,constants.level_fail_text_num-1);
+                okDialog.show(constants.level_fail_text[dt], "");
             }
 
         }
@@ -390,8 +383,8 @@ var victoryCheck = function () {
 // Checks if there are still animations running
 var isRunning = function () {
     var running = false;
-    for (var j=0; j<board_height && !running; j++) {
-        for (var i=0; i<board_width && !running; i++) {
+    for (var j=0; j<constants.board_height && !running; j++) {
+        for (var i=0; i<constants.board_width && !running; i++) {
             var obj = board[j][i];
             if (obj === undefined)
                 continue;
@@ -451,9 +444,9 @@ var clearRandomBlock = function (block_type, count) {
 // Check if blocks should fall down
 var fallDown = function () {
     var changes = 0;
-    for (var i=0; i<board_width; i++) {
+    for (var i=0; i<constants.board_width; i++) {
         var fallDist = 0;
-        for (var j=board_height-1; j>=0; j--) {
+        for (var j=constants.board_height-1; j>=0; j--) {
             if (bg_grid[j][i].blocking) {
                 fallDist = 0;
             } else if (board[j][i] === undefined) {
@@ -463,7 +456,7 @@ var fallDown = function () {
             } else {
                 if (fallDist > 0) {
                     var obj = board[j][i];
-                    obj.y = (j+fallDist)*block_height;
+                    obj.y = (j+fallDist)*constants.block_height;
                     board[j+fallDist][i] = obj;
                     board[j][i] = undefined;
                     changes++;
@@ -481,7 +474,7 @@ var fallDown = function () {
 // rows is true for checking row, false for column
 var checkSubsequentLine = function(j, rows, mark) {
     var last_b = 0, count = 0, changes = 0, i;
-    var imax = rows ? board_width : board_height;
+    var imax = rows ? constants.board_width : constants.board_height;
 
     for (i=0; i<imax; i++) {
         var obj = rows ? board[j][i] : board[i][j];
@@ -534,7 +527,7 @@ var checkSubsequentLine = function(j, rows, mark) {
 
 var checkSubsequentOnRows = function (mark) {
     var changes = 0, j;
-    for (j=0; j<board_height; j++) {
+    for (j=0; j<constants.board_height; j++) {
         changes += checkSubsequentLine(j, true, mark);
     }
     return changes;
@@ -544,7 +537,7 @@ var checkSubsequentOnRows = function (mark) {
 
 var checkSubsequentOnColumns = function (mark) {
     var changes = 0, i;
-    for (i=0; i<board_width; i++) {
+    for (i=0; i<constants.board_width; i++) {
         changes += checkSubsequentLine(i, false, mark);
     }
     return changes;
@@ -567,8 +560,8 @@ var checkForSubsequentJewels = function (mark) {
         return changes;
 
     // Do actual removal
-    for (var j=0; j<board_height; j++) {
-        for (var i=0; i<board_width; i++) {
+    for (var j=0; j<constants.board_height; j++) {
+        for (var i=0; i<constants.board_width; i++) {
             var obj = board[j][i];
             if (obj !== undefined && obj.to_remove) {
                 board[j][i] = undefined;
@@ -633,8 +626,8 @@ var checkMoves = function () {
     var di, dj;
     var pt;
     
-    for (i=0; i<board_width; i++) {
-        for (j=0; j<board_height; j++) {
+    for (i=0; i<constants.board_width; i++) {
+        for (j=0; j<constants.board_height; j++) {
             pt = point({x: i, y: j});
             obj = gridObject(board, pt);
 
@@ -680,9 +673,9 @@ var checkMovesAndReport = function () {
 
 // Checks if new blocks need to be spawned
 var spawnNewJewels = function () {
-    for (var i=0; i<board_width; i++) {
+    for (var i=0; i<constants.board_width; i++) {
         var n=0;
-        while (n<board_height && board[n][i] === undefined &&
+        while (n<constants.board_height && board[n][i] === undefined &&
                bg_grid[n][i].blocking === false)
             n++;
 
@@ -693,14 +686,14 @@ var spawnNewJewels = function () {
             }
     
             var obj = component.createObject(background);
-            obj.x = i*block_width;
-            obj.y = -block_height*(j+1);
+            obj.x = i*constants.block_width;
+            obj.y = -constants.block_height*(j+1);
 
-            obj.type = random(1, jewel_maxtype);
+            obj.type = random(1, constants.jewel_maxtype);
             obj.spawned = true;
             obj.particleSystem = background.ps;
             board[n-j-1][i] = obj;
-            obj.y = block_height*(n-j-1);
+            obj.y = constants.block_height*(n-j-1);
         }
     }
 };
@@ -709,8 +702,8 @@ var spawnNewJewels = function () {
 var penalty = function () {
     do
     {
-        var n = random(1, board_height-1); // Locking on top row is too cruel
-        var i = random(0, board_width-1);
+        var n = random(1, constants.board_height-1); // Locking on top row is too cruel
+        var i = random(0, constants.board_width-1);
     }
     while (board[n][i] === undefined || bg_grid[n][i].blocking === true);
 
@@ -733,12 +726,12 @@ var onChanges = function () {
             if ((mainPage.currentElapsedTime < oldScore) || (oldScore === 0))
             {
                 okDialog.mode = 1;
-                okDialog.show(last_level_msg, last_level_answer);            }
+                okDialog.show(last_level_msg, last_constants.level_answer);            }
             else
             {
                 okDialog.mode = 4;
-                dt = random(0,level_fail_text_num-1);
-                okDialog.show(level_fail_text[dt], "");
+                dt = random(0,constants.level_fail_text_num-1);
+                okDialog.show(constants.level_fail_text[dt], "");
             }
 
         }
@@ -788,13 +781,13 @@ var onChanges = function () {
 
 var reshuffleBlocks = function () {
     var obj;
-    for (var j=0; j<board_height; j++) {
-        for (var i=0; i<board_width; i++) {
+    for (var j=0; j<constants.board_height; j++) {
+        for (var i=0; i<constants.board_width; i++) {
             obj = gridObject(board, point({x:i, y:j}));
             if (obj === undefined)
                 continue;
 
-            obj.type = random(1, jewel_maxtype);
+            obj.type = random(1, constants.jewel_maxtype);
         }
     }
     onChanges();
@@ -840,8 +833,8 @@ var mousePressed = function (x, y) {
 
     moving1 = {};
     moving1.pt = point({x: x, y: y});
-    moving1.bpt = point({x: Math.floor(x/block_width),
-                        y:Math.floor(y/block_height)});
+    moving1.bpt = point({x: Math.floor(x/constants.block_width),
+                        y:Math.floor(y/constants.block_height)});
     moving1.obj = gridObject(board, moving1.bpt);
     moving1.started = false;
 };
@@ -865,7 +858,7 @@ var mouseMoved = function (x, y) {
     var dd = point({x:x, y:y}).minus(moving1.pt);
 
     var dist = dd.x.abs()-dd.y.abs();
-    if (dist.abs() < move_limit)
+    if (dist.abs() < constants.move_limit)
         return;
 
     moving1.started = true;

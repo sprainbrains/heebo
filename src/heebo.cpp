@@ -26,7 +26,6 @@
 
 #include "gameview.h"
 
-
 int main(int argc, char *argv[])
 {
     QGuiApplication *app(SailfishApp::application(argc, argv));
