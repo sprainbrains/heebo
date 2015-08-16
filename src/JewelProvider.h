@@ -20,7 +20,15 @@ public:
         QStringList parts = id.split("?");
 
         if (parts.at(0) == "empty")
-            return QPixmap(1, 1);
+        {
+            int s = 90;
+            if (parts.count() > 1)
+                s = parts.at(1).toInt();
+
+            QPixmap empty(s, s);
+            empty.fill(Qt::transparent);
+            return empty;
+        }
 
         QString scale = "_90";
 

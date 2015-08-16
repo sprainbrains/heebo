@@ -66,6 +66,8 @@ public:
 public slots:
   QString at(int r, int c) const;
   QString prop(int r, int c) const;
+  void set(int r, int c, QString t);
+  void setProp(int r, int c, QString t);
 
 signals:
   void levelChanged();

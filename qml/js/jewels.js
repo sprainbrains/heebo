@@ -220,23 +220,27 @@ var startNewGame = function () {
             if (bg_grid[j][i].blocking) {
                 continue;
             }
-            
-            var skip1 = 0;
-            if (j > 1 && !bg_grid[j-2][i].blocking && !bg_grid[j-1][i].blocking
-                && board[j-2][i].type === board[j-1][i].type)
-                skip1 = board[j-1][i].type;
-
-            var skip2 = 0;
-            if (i > 1 && !bg_grid[j][i-2].blocking && !bg_grid[j][i-1].blocking
-                && board[j][i-2].type === board[j][i-1].type)
-                skip2 = board[j][i-1].type;
-
             var type = 0;
-            do {
-                type = random(1, constants.jewel_maxtype);
-            } while (type === skip1 || type === skip2);
+
+            if (!mainPage.editorMode)
+            {
+                var skip1 = 0;
+                if (j > 1 && !bg_grid[j-2][i].blocking && !bg_grid[j-1][i].blocking
+                    && board[j-2][i].type === board[j-1][i].type)
+                    skip1 = board[j-1][i].type;
+
+                var skip2 = 0;
+                if (i > 1 && !bg_grid[j][i-2].blocking && !bg_grid[j][i-1].blocking
+                    && board[j][i-2].type === board[j][i-1].type)
+                    skip2 = board[j][i-1].type;
+
+                do {
+                    type = random(1, constants.jewel_maxtype);
+                } while (type === skip1 || type === skip2);
+            }
 
             newBlock(j, i, type);
+
             if (mapset.prop(j,i) === 'locked') {
                 board[j][i].locked = 1;
             }
@@ -329,6 +333,9 @@ var storeOtherSettings = function(penalty, particles) {
 
 // Check victory condition
 var victoryCheck = function () {
+    if (mainPage.editorMode)
+        return;
+
     var victory = true;
     for (var j=0; j<constants.board_height && victory; j++) {
         for (var i=0; i<constants.board_width && victory; i++) {
@@ -660,6 +667,8 @@ var checkMoves = function () {
 //-----------------------------------------------------------------------------
 
 var checkMovesAndReport = function () {
+    if (mainPage.editorMode)
+        return;
     var movesLeft = checkMoves();
     if (!movesLeft) {
         okDialog.mode = 2;
@@ -837,12 +846,156 @@ var mousePressed = function (x, y) {
                         y:Math.floor(y/constants.block_height)});
     moving1.obj = gridObject(board, moving1.bpt);
     moving1.started = false;
+
+    if (mainPage.editorMode)
+    {
+        if (!moving1.bpt.insideGrid())
+        {
+            console.log("outside grid" + " " +  moving1.bpt.x + " " + moving1.bpt.y)
+            return
+        }
+
+        if (mainPage.editorModeBlock)
+        {
+            if (bg_grid.isBlocking(moving1.bpt))
+            {
+                console.log("block to nonblock " + moving1.bpt.y + " " + moving1.bpt.x)
+                mapset.set(moving1.bpt.y, moving1.bpt.x, "0")
+                mapset.setProp(moving1.bpt.y, moving1.bpt.x, "")
+                if (!moving1.obj)
+                    newBlock(moving1.bpt.y, moving1.bpt.x, 0)
+                moving1.obj = gridObject(board, moving1.bpt);
+                moving1.obj.locked = 0
+            }
+            else
+            {
+                console.log("nonblock to block " + moving1.bpt.y + " " + moving1.bpt.x)
+                mapset.set(moving1.bpt.y, moving1.bpt.x, "W")
+                mapset.setProp(moving1.bpt.y, moving1.bpt.x, "")
+                if (!moving1.obj)
+                    newBlock(moving1.bpt.y, moving1.bpt.x, 0)
+                moving1.obj = gridObject(board, moving1.bpt);
+                moving1.obj.locked = 0
+            }
+            updateBorders()
+        }
+        else
+        {
+            if (moving1.obj && !bg_grid.isBlocking(moving1.bpt))
+            {
+                if (moving1.obj.locked == 0)
+                {
+                    console.log("unlock to lock1 " + moving1.bpt.y + " " + moving1.bpt.x)
+                    moving1.obj.locked = 1
+                    mapset.setProp(moving1.bpt.y, moving1.bpt.x, "locked")
+                }
+                else if (moving1.obj.locked == 1)
+                {
+                    console.log("lock1 to lock2 " + moving1.bpt.y + " " + moving1.bpt.x)
+                    moving1.obj.locked = 2
+                    mapset.setProp(moving1.bpt.y, moving1.bpt.x, "locked2")
+                }
+                else if (moving1.obj.locked == 2)
+                {
+                    console.log("lock2 to unlock " + moving1.bpt.y + " " + moving1.bpt.x)
+                    moving1.obj.locked = 0
+                    mapset.setProp(moving1.bpt.y, moving1.bpt.x, "")
+                }
+            }
+            else if (bg_grid.isBlocking(moving1.bpt) || !moving1.obj)
+            {
+                console.log("nonblock to lock1 " + moving1.bpt.y + " " + moving1.bpt.x)
+                mapset.set(moving1.bpt.y, moving1.bpt.x, "0")
+                mapset.setProp(moving1.bpt.y, moving1.bpt.x, "locked")
+                if (!moving1.obj)
+                    newBlock(moving1.bpt.y, moving1.bpt.x, 0)
+                moving1.obj = gridObject(board, moving1.bpt);
+                moving1.obj.locked = 1
+                updateBorders()
+            }
+        }
+    }
 };
+
+var updateBorders = function ()
+{
+    var dx = moving1.bpt.x
+    var dy = moving1.bpt.y
+    updateBorder(dx, dy)
+    updateBorder(dx, dy-1)
+    updateBorder(dx, dy+1)
+    updateBorder(dx-1, dy)
+    updateBorder(dx+1, dy)
+
+    for (var j=0; j<constants.board_height; j++) {
+        for (var i=0; i<constants.board_width; i++) {
+            var b = mapset.at(j,i);
+            if (b === 'W')
+            {
+                bg_grid[j][i].wall_border = '0';
+                bg_grid[j][i].blocking = true;
+            } else {
+                bg_grid[j][i].wall_border = b;
+                bg_grid[j][i].blocking = false;
+            }
+        }
+    }
+}
+
+var updateBorder = function (x, y)
+{
+      var here = mapset.at(y, x);
+      if (here == 'W')
+        return;
+
+      var left  = mapset.at(y, x-1) == 'W';
+      var right = mapset.at(y, x+1) == 'W';
+      var above = mapset.at(y-1, x) == 'W';
+      var below = mapset.at(y+1, x) == 'W';
+
+      var ch = '0';
+      if (left && right && above && below) // it's all around us!!
+        ch = 'O';
+      else if (left && right && above)
+        ch = 'A';
+      else if (left && right && below)
+        ch = 'U';
+      else if (left && above && below)
+        ch = '<';
+      else if (right && above && below)
+        ch = '>';
+      else if (above && below)
+        ch = '-';
+      else if (left && right)
+        ch = '|';
+      else if (left && above)
+        ch = '3';
+      else if (left && below)
+        ch = '9';
+      else if (left)
+        ch = '6';
+      else if (right && above)
+        ch = '1';
+      else if (right && below)
+        ch = '7';
+      else if (right)
+        ch = '4';
+      else if (above)
+        ch = '2';
+      else if (below)
+        ch = '8';
+
+      mapset.set(y, x, ch);
+}
+
 
 //-----------------------------------------------------------------------------
 
 // Called when user moves mouse or swipes 
 var mouseMoved = function (x, y) {
+    if (mainPage.editorMode)
+        return;
+
     if (moving1 === undefined || moving1.obj === undefined ||
         okDialog.visible || mainMenu.visible || isRunning() || finalAnim ||
        moving1.obj.locked || moving1.started !== false)

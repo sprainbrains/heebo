@@ -39,6 +39,11 @@ Page {
     property bool penalty: false
 
     property int dt: 0
+
+    property bool editorMode: false
+    property bool editorModeBlock: true
+
+    onEditorModeChanged: Jewels.init()
     
     signal animDone()
     signal jewelKilled();
@@ -137,6 +142,7 @@ Page {
 
             Row {
                 id: currentLevel
+                visible: !editorMode
                 anchors {
                     left: parent.left
                     verticalCenter: parent.verticalCenter
@@ -174,6 +180,7 @@ Page {
             }
             Row {
                 id: elapsedTime
+                visible: !editorMode
                 anchors {
                     verticalCenter: parent.verticalCenter
                     verticalCenterOffset: constants.fontsize_time
@@ -260,6 +267,37 @@ Page {
                 }
             }
 
+        }
+
+        IconButton
+        {
+            id: editorButton
+            icon.source: "image://theme/icon-m-edit"
+            highlighted: editorMode
+            onClicked: editorMode = !editorMode
+            anchors.right: menuButton.left
+            anchors.rightMargin: Theme.paddingLarge
+            anchors.verticalCenter: menuButton.verticalCenter
+        }
+
+        Button
+        {
+            id: editmodeSelectButton
+            anchors.right: editormodeLabel.left
+            anchors.rightMargin: Theme.paddingLarge
+            anchors.verticalCenter: menuButton.verticalCenter
+            visible: editorMode
+            text: "Toggle mode"
+            onClicked: editorModeBlock = !editorModeBlock
+        }
+        Label
+        {
+            id: editormodeLabel
+            anchors.right: editorButton.left
+            visible: editorMode
+            anchors.rightMargin: Theme.paddingLarge
+            anchors.verticalCenter: menuButton.verticalCenter
+            text: editorModeBlock ? "Block" : "Lock"
         }
     }
 

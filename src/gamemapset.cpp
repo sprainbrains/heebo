@@ -77,6 +77,18 @@ QString GameMapSet::at(int r, int c) const
   return m_maps[m_level]->atName(r,c);
 }
 
+void GameMapSet::set(int r, int c, QString t)
+{
+    m_maps[m_level]->set(r, c, t.at(0));
+}
+
+void GameMapSet::setProp(int r, int c, QString t)
+{
+    QPoint p(c, r);
+    m_maps[m_level]->setProperty(p, t);
+}
+
+
 //------------------------------------------------------------------------------
 
 QString GameMapSet::prop(int r, int c) const
