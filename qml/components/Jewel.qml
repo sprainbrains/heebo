@@ -60,8 +60,7 @@ Item {
         
         width: jewel.width; height: jewel.width
 
-        source: "../images/" + typeName
-                                 + (mainPage.isRunning && type?"_eyeshut":"") + ".png"
+        source: "image://jewels/" + typeName + (mainPage.isRunning && type?"_eyeshut":"") + "?" + width
         opacity: 1
 
         smooth: true

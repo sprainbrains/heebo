@@ -9,7 +9,8 @@ INSTALLS += data
 
 HEADERS += src/gameview.h \
            src/gamemapset.h \
-           src/gamemap.h
+           src/gamemap.h \
+    src/JewelProvider.h
 
 SOURCES += src/gameview.cpp \
            src/heebo.cpp \
@@ -37,6 +38,7 @@ OTHER_FILES += \
     qml/js/jewels.js \
     qml/js/utils.js \
     qml/images/* \
+    qml/images/jewels/* \
     data/*.dat \
 
 

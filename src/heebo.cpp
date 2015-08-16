@@ -25,13 +25,18 @@
 #include <QQmlContext>
 
 #include "gameview.h"
+#include "JewelProvider.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication *app(SailfishApp::application(argc, argv));
+    QQuickWindow::setDefaultAlphaBuffer(true);
     QQuickView *view(SailfishApp::createView());
 
     GameView game(view);
+
+    QQmlEngine *engine = view->engine();
+    engine->addImageProvider(QLatin1String("jewels"), new JewelProvider);
 
     view->setSource(SailfishApp::pathTo("qml/wrapper.qml"));
     view->show();
