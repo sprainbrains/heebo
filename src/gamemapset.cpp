@@ -36,6 +36,11 @@ GameMapSet::GameMapSet(const QString& fileName, int initialLevel,
 {
     qDebug() << "Loading map: " << m_fileName;
     loadMap();
+
+    /* If we try to open nonexisting level, start from first level */
+    if (initialLevel >= m_number)
+        initialLevel = 0;
+
     setLevel(initialLevel);
 
     /* Following values are read from settings if they are -1 */
