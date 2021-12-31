@@ -9,7 +9,7 @@ Summary:    Heebo for jolla
 Version:    0.3.0
 Release:    0
 Group:      Qt/Qt
-License:    LICENSE
+License:    GPLv3
 URL:        https://github.com/kimmoli/heebo
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   qt5-qtdeclarative-import-particles2
@@ -22,6 +22,10 @@ BuildRequires:  desktop-file-utils
 
 %description
 Simple and addictive Match 3 game with quirky characters.
+
+Categories:
+  - Game
+Icon: https://raw.githubusercontent.com/kimmoli/heebo/sailfishonly/harbour-heebo.png
 
 %prep
 %setup -q -n %{name}-%{version}
