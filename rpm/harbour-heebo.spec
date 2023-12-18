@@ -45,10 +45,10 @@ desktop-file-install --delete-original       \
    %{buildroot}%{_datadir}/applications/*.desktop
 
 %files
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}
-%{_datadir}/icons/hicolor/86x86/apps/
-%{_datadir}/applications/
+%defattr(-,root,root,-)
+%{_bindir}/%{name}
+%{_datadir}/%{name}
 %{_datadir}/%{name}/qml/
 %{_datadir}/%{name}/data/
-
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/icons/hicolor/*/apps/%{name}.png

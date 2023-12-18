@@ -4,3 +4,9 @@ X-Nemo-Application-Type=silica-qt5
 Name=Heebo
 Icon=harbour-heebo
 Exec=harbour-heebo
+
+
+[X-Application]
+Permissions=Audio;Documents;Downloads;Internet;Location;MediaIndexing;Microphone;Music;Pictures;PublicDir;RemovableMedia;UserDirs;Videos
+OrganizationName=com.sailfishapp
+ApplicationName=heebo
