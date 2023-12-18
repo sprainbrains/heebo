@@ -7,6 +7,6 @@ Exec=harbour-heebo
 
 
 [X-Application]
-Permissions=PublicDirs
+Permissions=
 OrganizationName=com.sailfishapp
 ApplicationName=heebo
